@@ -163,18 +163,23 @@
 					$date = $carbon->format('M d Y h:iA');
 			@endphp
 			<p class="card-text"><b>Addedby</b> {{$sms_subscriber->createdby->NAME }} <b>On</b>  {{$date}}  </p>			
-			<p class="card-text">
-			<div class="row"><div class="col-md-4 col-12 mb-3 mb-md-0">
-			<b>CustomerId :</b> {{$sms_subscriber->CustomerId}} </div>
-			<div class="col-md-4 col-12 mb-3 mb-md-0"><b>FormNo :</b> {{$sms_subscriber->FormNo}} 
-			</div>
-			</div>
-			</p>
 			<p class="card-text"><b>MobileNo</b> : {{$sms_subscriber->MobileNo}}</p>
-			<p class="card-text"><b>Operator :</b> {{$sms_subscriber->operator->NAME }} <b>CODE :</b> {{$sms_subscriber->operator->CODE }}</p>
-			<p class="card-text"><b>Society :</b> {{$sms_subscriber->society->SocietyName }} <b>Area :</b> {{$sms_subscriber->society->area->NAME }}</p>
-			
-			
+				<div class="row">
+					<div class="col-md-4 col-12 mb-3 mb-md-0">
+					<b>CustomerId :</b> {{$sms_subscriber->CustomerId}}</div>
+					
+					<div class="col-md-4 col-12 mb-3 mb-md-0">
+					<b>FormNo :</b> {{$sms_subscriber->FormNo}} </div>
+				</div>			
+				<p class="card-text"><div class="row">
+					<div class="card-text col-md-4 col-12 mb-3 mb-md-0"><b>Operator :</b> {{$sms_subscriber->operator->NAME }} </div>				
+					<div class="col-md-4 col-12 mb-3 mb-md-0"><b>CODE :</b> {{$sms_subscriber->operator->CODE }}</div>
+				</div></p>
+				<div class="row">
+					
+					<div class="col-md-4 col-12 mb-3 mb-md-0"><b>Society :</b> {{$sms_subscriber->society->SocietyName }} </div>
+					<div class="col-md-4 col-12 mb-3 mb-md-0"><b>Area :</b> {{$sms_subscriber->society->area->NAME }}</div>
+				</div>
             <!--<h5 class='card-title'>OperatorId : {{$sms_subscriber->OperatorId}}</h5>
             <h5 class='card-title'>SocietyId : {{$sms_subscriber->SocietyId}}</h5>
             <h5 class='card-title'>MobileNo : {{$sms_subscriber->MobileNo}}</h5>
@@ -216,13 +221,17 @@
         @else
             <button type="button" class="btn rounded-pill btn-outline-secondary">InActive</button>
         @endif</p>
+	
+	<p class="card-text"><b>AccountId :</b> {{$account->Id}}</p>
 	<p class="card-text"><b>Addedon :</b> {{$date}}</p>
 	<p class="card-text"><b>Addedby :</b> {{$account->createdby->NAME}}</p>
 	<p class="card-text"><b>STBNo :</b> {{$account->pairing->stb->STBNo}}</p>
+	<p class="card-text"><b>STBModel :</b> {{$account->pairing->stb->brand->BrandTitle}} & <b> Box Type :</b> {{$account->pairing->stb->brand->BoxType?'HD':'SD'}}</p>
 	<p class="card-text"><b>SmartcardNo :</b> {{$account->pairing->smartcard->SmartcardNo}}</p>
 	<p class="card-text"><b>ActivationDate :</b> {{$account->ActivationDate}}</p>
 	<p class="card-text"><b>DeactivationDate :</b>{{$account->DeactivationDate}}</p>
 	<p class="card-text"><b>Remark :</b> {{$account->Remark}}</p>
+	<p class="card-text"><b>Bouques :</b> {{$account->transactions->count()}}</p>
 							  <!--<div class="tab-pane fade" id="list-{{$account->Id}}">
 								SubscriberId : {{$account->SubscriberId}}<br>
 								IsPrimary : {{$account->IsPrimary}}<br>
