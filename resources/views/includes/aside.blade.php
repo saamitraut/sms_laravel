@@ -183,9 +183,19 @@
                     <div data-i18n="SmsAreacode">SmsAreacode</div>
                   </a>
                 </li>
+				<li class="menu-item">
+                  <a href="\sms_stbscbrand" class="menu-link">
+                    
+					<div data-i18n="SmsStbscbrand">SmsStbscbrand</div>
+                  </a>
+                </li>
+				<li class="menu-item">
+                  <a href="\prp_accounttransaction" class="menu-link">
+					<div data-i18n="Transactions">Transactions</div>
+                  </a>
+                </li>
               </ul>
-            </li>
-		
+            </li>		
 		
 			<li class="menu-item">
               <a href="\raise_requirement" class="menu-link">

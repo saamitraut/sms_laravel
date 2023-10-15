@@ -282,3 +282,63 @@ Route::group(array('prefix' => 'sms_areacode'), function() {
     Route::get('/view-sms_areacode/{id}', 'SmsAreacodeController@view');
 });
 // end of sms_areacode routes
+// routes for sms_stbscbrand.
+Route::group(array('prefix' => 'sms_stbscbrand'), function() {
+    Route::get('/', 'SmsStbscbrandController@index');
+    Route::get('/add-sms_stbscbrand', 'SmsStbscbrandController@add');
+    Route::post('/add-sms_stbscbrand-post', 'SmsStbscbrandController@addPost');
+    Route::get('/delete-sms_stbscbrand/{id}', 'SmsStbscbrandController@delete');
+    Route::get('/edit-sms_stbscbrand/{id}', 'SmsStbscbrandController@edit');
+    Route::post('/edit-sms_stbscbrand-post', 'SmsStbscbrandController@editPost');
+    Route::get('/change-status-sms_stbscbrand/{id}', 'SmsStbscbrandController@changeStatus');
+    Route::get('/view-sms_stbscbrand/{id}', 'SmsStbscbrandController@view');
+});
+// end of sms_stbscbrand routes
+// routes for prp_accounttransaction.
+Route::group(array('prefix' => 'prp_accounttransaction'), function() {
+    Route::get('/', 'PrpAccounttransactionController@index');
+    Route::get('/add-prp_accounttransaction', 'PrpAccounttransactionController@add');
+    Route::post('/add-prp_accounttransaction-post', 'PrpAccounttransactionController@addPost');
+    Route::get('/delete-prp_accounttransaction/{id}', 'PrpAccounttransactionController@delete');
+    Route::get('/edit-prp_accounttransaction/{id}', 'PrpAccounttransactionController@edit');
+    Route::post('/edit-prp_accounttransaction-post', 'PrpAccounttransactionController@editPost');
+    Route::get('/change-status-prp_accounttransaction/{id}', 'PrpAccounttransactionController@changeStatus');
+    Route::get('/view-prp_accounttransaction/{id}', 'PrpAccounttransactionController@view');
+});
+// end of prp_accounttransaction routes
+// routes for prp_bouque_assets.
+Route::group(array('prefix' => 'prp_bouque_assets'), function() {
+    Route::get('/', 'PrpBouqueAssetController@index');
+    Route::get('/add-prp_bouque_assets', 'PrpBouqueAssetController@add');
+    Route::post('/add-prp_bouque_assets-post', 'PrpBouqueAssetController@addPost');
+    Route::get('/delete-prp_bouque_assets/{id}', 'PrpBouqueAssetController@delete');
+    Route::get('/edit-prp_bouque_assets/{id}', 'PrpBouqueAssetController@edit');
+    Route::post('/edit-prp_bouque_assets-post', 'PrpBouqueAssetController@editPost');
+    Route::get('/change-status-prp_bouque_assets/{id}', 'PrpBouqueAssetController@changeStatus');
+    Route::get('/view-prp_bouque_assets/{id}', 'PrpBouqueAssetController@view');
+});
+// end of prp_bouque_assets routes
+// routes for sms_channel.
+Route::group(array('prefix' => 'sms_channel'), function() {
+    Route::get('/', 'SmsChannelController@index');
+    Route::get('/add-sms_channel', 'SmsChannelController@add');
+    Route::post('/add-sms_channel-post', 'SmsChannelController@addPost');
+    Route::get('/delete-sms_channel/{id}', 'SmsChannelController@delete');
+    Route::get('/edit-sms_channel/{id}', 'SmsChannelController@edit');
+    Route::post('/edit-sms_channel-post', 'SmsChannelController@editPost');
+    Route::get('/change-status-sms_channel/{id}', 'SmsChannelController@changeStatus');
+    Route::get('/view-sms_channel/{id}', 'SmsChannelController@view');
+});
+// end of sms_channel routes
+// routes for sms_package.
+Route::group(array('prefix' => 'sms_package'), function() {
+    Route::get('/', 'SmsPackageController@index');
+    Route::get('/add-sms_package', 'SmsPackageController@add');
+    Route::post('/add-sms_package-post', 'SmsPackageController@addPost');
+    Route::get('/delete-sms_package/{id}', 'SmsPackageController@delete');
+    Route::get('/edit-sms_package/{id}', 'SmsPackageController@edit');
+    Route::post('/edit-sms_package-post', 'SmsPackageController@editPost');
+    Route::get('/change-status-sms_package/{id}', 'SmsPackageController@changeStatus');
+    Route::get('/view-sms_package/{id}', 'SmsPackageController@view');
+});
+// end of sms_package routes

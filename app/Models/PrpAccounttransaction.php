@@ -16,8 +16,16 @@ class PrpAccounttransaction extends Eloquent
         $res = array();
         foreach ($prp_accounttransaction as $prp_accounttransaction)
         {
-            $res[$prp_accounttransaction['Id']] = $prp_accounttransaction;
+            $res[$prp_accounttransaction['id']] = $prp_accounttransaction;
         }
         return $res;
     }
+	public function createdby()
+    {
+         return $this->belongsTo(SmsAcces::class, 'CreatedBy', 'Id');
+    }
+	public function bouque()
+    {
+         return $this->belongsTo(PrpBouque::class, 'BouqueId', 'Id');
+	}
 }

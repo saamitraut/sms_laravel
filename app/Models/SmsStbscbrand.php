@@ -16,7 +16,7 @@ class SmsStbscbrand extends Eloquent
         $res = array();
         foreach ($sms_stbscbrand as $sms_stbscbrand)
         {
-            $res[$sms_stbscbrand['Id']] = $sms_stbscbrand;
+            $res[$sms_stbscbrand['id']] = $sms_stbscbrand;
         }
         return $res;
     }

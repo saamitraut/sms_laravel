@@ -20,4 +20,8 @@ class SmsStb extends Eloquent
         }
         return $res;
     }
+	public function brand()
+    {
+         return $this->belongsTo(SmsStbscbrand::class, 'BrandId', 'Id');
+    }
 }

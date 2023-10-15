@@ -10,22 +10,18 @@ class SmsSubscriberaccount extends Eloquent
 {
     // protected $table = 'sms_subscriberaccounts';
 
-    public static function list()
-    {
-        $sms_subscriberaccounts = self::all()->toArray();
-        $res = array();
-        foreach ($sms_subscriberaccounts as $sms_subscriberaccount)
-        {
-            $res[$sms_subscriberaccount['Id']] = $sms_subscriberaccount;
-        }
-        return $res;
-    }
-	public function createdby()
+    public function createdby()
     {
          return $this->belongsTo(SmsAcces::class, 'CreatedBy', 'Id');
     }
+	
 	public function pairing()
     {
          return $this->belongsTo(SmsPairing::class, 'PairingId', 'Id');
+    }
+	
+	public function transactions()
+    {
+        return $this->hasMany(PrpAccounttransaction::class, 'AccountId', 'Id');
     }
 }

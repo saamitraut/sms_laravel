@@ -8,7 +8,7 @@ use Eloquent;
 
 class PrpBouque extends Eloquent
 {
-    // protected $table = 'prp_bouques';
+    protected $table = 'PRP_BOUQUE';
 
     public static function list()
     {
@@ -20,4 +20,9 @@ class PrpBouque extends Eloquent
         }
         return $res;
     }
+	public function assets()
+    {
+        return $this->hasMany(PrpBouqueAsset::class, 'BouqueId', 'Id');
+    }
+
 }

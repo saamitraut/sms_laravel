@@ -181,8 +181,7 @@
             <h5 class='card-title'>LCOSharing : {{$prp_accounttransaction->LCOSharing}}</h5>
             <h5 class='card-title'>NCFAmount : {{$prp_accounttransaction->NCFAmount}}</h5>
             <h5 class='card-title'>NCF_LCOSharing : {{$prp_accounttransaction->NCF_LCOSharing}}</h5>
-            
-			<h5 class='card-title'>BouqueId : {{$PRP_BOUQUE[$prp_accounttransaction->BouqueId]['BouqueName']}}</h5>
+            <h5 class='card-title'>BouqueId : {{$prp_accounttransaction->BouqueId}}</h5>
             <h5 class='card-title'>Status : {{$prp_accounttransaction->Status}}</h5>
             <h5 class='card-title'>ActivationDate : {{$prp_accounttransaction->ActivationDate}}</h5>
             <h5 class='card-title'>DeactivationDate : {{$prp_accounttransaction->DeactivationDate}}</h5>

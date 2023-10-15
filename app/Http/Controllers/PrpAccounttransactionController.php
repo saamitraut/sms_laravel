@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PrpAccounttransaction as PrpAccounttransaction;
-//use App\Models\PRPACCOUNTTRANSACTION as PRPACCOUNTTRANSACTION;
 use App\Models\PRPBOUQUE as PRPBOUQUE;
-use App\Models\SmsSubscriberaccount as SMSSUBSCRIBERACCOUNTS;
+use App\Models\SmsSubscriberaccount as SmsSubscriberaccount;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
@@ -14,11 +13,10 @@ class PrpAccounttransactionController extends Controller {
 
     public function index(Request $request)
     {
-        $data['prp_accounttransaction'] = PrpAccounttransaction::all();
         $data['prp_accounttransaction'] = PrpAccounttransaction::paginate($request->get('pagination_limit', 5));
-    $data['PRP_ACCOUNTTRANSACTION'] = PrpAccounttransaction::list();
-    $data['PRP_BOUQUE'] = PRPBOUQUE::list();
-    $data['SMS_SUBSCRIBERACCOUNTS'] = SMSSUBSCRIBERACCOUNTS::list();
+		
+		$data['PRP_BOUQUE'] = PRPBOUQUE::list();
+		$data['SMS_SUBSCRIBERACCOUNTS'] = SmsSubscriberaccount::list();
         $data['columnNames'] = ['Id','AccountId','Rate','Amount','LCOSharing','NCFAmount','NCF_LCOSharing','BouqueId','Status','ActivationDate','DeactivationDate','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','OperatorId','SessionFlag','CASStatus','IsAutoRenew'];
         return view('prp_accounttransaction/index', $data);
     }

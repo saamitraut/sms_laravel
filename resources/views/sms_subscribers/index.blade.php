@@ -152,101 +152,154 @@
         <nav aria-label="Page navigation">{{ $sms_subscribers->links() }}	</nav>
         <?php $i = 1; ?>
         @foreach($sms_subscribers as $sms_subscriber)
+		@php 	$carbon = \Illuminate\Support\Carbon::parse ($sms_subscriber->CreatedOn);
+			$date = $carbon->format('M d Y h:iA');
+		@endphp
         <div class='card mb-4'>
             <div class='card-body'>
-			<div class="row">
-			<div class="col-lg-6 mb-4 mb-xl-0">
-            <!--<h5 class='card-title'>Id : {{$sms_subscriber->Id}}</h5>-->
-            <p class="card-text"><b>SubscriberName :</b> {{$sms_subscriber->subscriber_deatils->FName }} {{$sms_subscriber->subscriber_deatils->Mname  }} {{$sms_subscriber->subscriber_deatils->LName}}</p>
+			<ul class="list-group list-group-horizontal-md text-md-center">
+                       <li class="list-group-item"><b>SubscriberName</b> {{$sms_subscriber->subscriber_deatils->FName }} {{$sms_subscriber->subscriber_deatils->Mname  }} {{$sms_subscriber->subscriber_deatils->LName}}</li>
+                      <li class="list-group-item"><b>Addedby</b> {{$sms_subscriber->createdby->NAME }}  {{$date}}  </li>
+                      <li class="list-group-item"><b>MobileNo</b> : {{$sms_subscriber->MobileNo}}</li>
+                      <li class="list-group-item"><b>CustomerId:</b> {{$sms_subscriber->CustomerId}}</li>
+                      <li class="list-group-item"><b>FormNo :</b> {{$sms_subscriber->FormNo}}</li>
+					  <li class="list-group-item"><b>Operator:</b> {{$sms_subscriber->operator->NAME }}</li>
+					  <li class="list-group-item"><b>CODE:</b> {{$sms_subscriber->operator->CODE }}</li>
+					   <li class="list-group-item"><b>Society:</b> {{$sms_subscriber->society->SocietyName }}</li>
+					   <li class="list-group-item"><b>Area:</b> {{$sms_subscriber->society->area->NAME }}</li></ul>
 			
-			@php 	$carbon = \Illuminate\Support\Carbon::parse($sms_subscriber->CreatedOn);
-					$date = $carbon->format('M d Y h:iA');
-			@endphp
-			<p class="card-text"><b>Addedby</b> {{$sms_subscriber->createdby->NAME }} <b>On</b>  {{$date}}  </p>			
-			<p class="card-text"><b>MobileNo</b> : {{$sms_subscriber->MobileNo}}</p>
-				<div class="row">
-					<div class="col-md-4 col-12 mb-3 mb-md-0">
-					<b>CustomerId :</b> {{$sms_subscriber->CustomerId}}</div>
-					
-					<div class="col-md-4 col-12 mb-3 mb-md-0">
-					<b>FormNo :</b> {{$sms_subscriber->FormNo}} </div>
-				</div>			
-				<p class="card-text"><div class="row">
-					<div class="card-text col-md-4 col-12 mb-3 mb-md-0"><b>Operator :</b> {{$sms_subscriber->operator->NAME }} </div>				
-					<div class="col-md-4 col-12 mb-3 mb-md-0"><b>CODE :</b> {{$sms_subscriber->operator->CODE }}</div>
-				</div></p>
-				<div class="row">
-					
-					<div class="col-md-4 col-12 mb-3 mb-md-0"><b>Society :</b> {{$sms_subscriber->society->SocietyName }} </div>
-					<div class="col-md-4 col-12 mb-3 mb-md-0"><b>Area :</b> {{$sms_subscriber->society->area->NAME }}</div>
-				</div>
-            <!--<h5 class='card-title'>OperatorId : {{$sms_subscriber->OperatorId}}</h5>
-            <h5 class='card-title'>SocietyId : {{$sms_subscriber->SocietyId}}</h5>
-            <h5 class='card-title'>MobileNo : {{$sms_subscriber->MobileNo}}</h5>
-            <h5 class='card-title'>Status : {{$sms_subscriber->Status}}</h5>
-            <h5 class='card-title'>ProspectId : {{$sms_subscriber->ProspectId}}</h5>
-            <h5 class='card-title'>PCustomerId : {{$sms_subscriber->PCustomerId}}</h5>
-            <h5 class='card-title'>OpTobeBilled : {{$sms_subscriber->OpTobeBilled}}</h5>
-            <h5 class='card-title'>CreatedOn : {{$sms_subscriber->CreatedOn}}</h5>
-            <h5 class='card-title'>CreatedBy : {{$sms_subscriber->CreatedBy}}</h5>
-            <h5 class='card-title'>UpdatedOn : {{$sms_subscriber->UpdatedOn}}</h5>
-            <h5 class='card-title'>UpdatedBy : {{$sms_subscriber->UpdatedBy}}</h5>
-            <h5 class='card-title'>Deleted : {{$sms_subscriber->Deleted}}</h5>
-            <h5 class='card-title'>Remark : {{$sms_subscriber->Remark}}</h5>
-            <h5 class='card-title'>sms_id : {{$sms_subscriber->sms_id}}</h5>-->
-			</div>
-		<div class="col-lg-6">
+		
                       <small class="text-light fw-semibold">Accounts</small>
-                      <div class="mt-3">
-                        <div class="row">
-                          <div class="col-md-4 col-12 mb-3 mb-md-0">
-                            <div class="list-group">
+                      <div class="demo-inline-spacing mt-3">
+                            
+							<div class="list-group list-group-horizontal-md text-md-center">
                               @php	$counter=1;	 @endphp
 							  @foreach($sms_subscriber->accounts as $account)
-							  <a class="list-group-item list-group-item-action" id="list-{{$account->Id}}-list" data-bs-toggle="list" href="#list-{{$account->Id}}">Account {{$counter}}</a>
+							  <a class="list-group-item list-group-item-action" id="list-{{$account->Id}}-list" data-bs-toggle="list" href="#list-{{$account->Id}}">Account{{$counter}}</a>
 							  @php	$counter++;	@endphp
 							  @endforeach
                             </div>
-                          </div>
-                          <div class="col-md-8 col-12">
+
                             <div class="tab-content p-0">
 							@foreach($sms_subscriber->accounts as $account) 
                               <div class="tab-pane fade" id="list-{{$account->Id}}">
-	@php 	$carbon = \Illuminate\Support\Carbon::parse($account->CreatedOn);
-			$date = $carbon->format('M d Y h:iA');
-			@endphp
+									@php 	$carbon = \Illuminate\Support\Carbon::parse($account->CreatedOn);
+									$date = $carbon->format('M d Y h:iA');	@endphp
+	
 	<p class="card-text">
 		@if ($account->Status === 1)
             <button type="button" class="btn rounded-pill btn-outline-primary">Active</button>
         @else
             <button type="button" class="btn rounded-pill btn-outline-secondary">InActive</button>
-        @endif</p>
-	
-	<p class="card-text"><b>AccountId :</b> {{$account->Id}}</p>
-	<p class="card-text"><b>Addedon :</b> {{$date}}</p>
-	<p class="card-text"><b>Addedby :</b> {{$account->createdby->NAME}}</p>
-	<p class="card-text"><b>STBNo :</b> {{$account->pairing->stb->STBNo}}</p>
-	<p class="card-text"><b>STBModel :</b> {{$account->pairing->stb->brand->BrandTitle}} & <b> Box Type :</b> {{$account->pairing->stb->brand->BoxType?'HD':'SD'}}</p>
-	<p class="card-text"><b>SmartcardNo :</b> {{$account->pairing->smartcard->SmartcardNo}}</p>
-	<p class="card-text"><b>ActivationDate :</b> {{$account->ActivationDate}}</p>
-	<p class="card-text"><b>DeactivationDate :</b>{{$account->DeactivationDate}}</p>
-	<p class="card-text"><b>Remark :</b> {{$account->Remark}}</p>
-	<p class="card-text"><b>Bouques :</b> {{$account->transactions->count()}}</p>
-							  <!--<div class="tab-pane fade" id="list-{{$account->Id}}">
-								SubscriberId : {{$account->SubscriberId}}<br>
-								IsPrimary : {{$account->IsPrimary}}<br>
-								PairingId : {{$account->PairingId}}<br>
-								ActivationDate : {{$account->ActivationDate}}<br>
-								DeactivationDate : {{$account->DeactivationDate}}<br>
-								Remark : {{$account->Remark}} <br>-->
-                              </div>
-							@endforeach
-                            </div>
-                          </div>
-                        </div>
+        @endif &ensp; <b>AccountId </b> {{$account->Id}}</p>
+	<ul class="list-group list-group-horizontal-md text-md-center">
+                      <li class="list-group-item"><b>Addedby</b> {{$account->createdby->NAME}} {{$date}}</li>
+                      <li class="list-group-item"><b>STBNo/SmartcardNo:</b> {{$account->pairing->stb->STBNo}} {{$account->pairing->smartcard->SmartcardNo}}</li>
+                      <li class="list-group-item"><b>STBModel BoxType:</b> {{$account->pairing->stb->brand->BrandTitle}} {{$account->pairing->stb->brand->BoxType?'HD':'SD'}}</li>
+                      <li class="list-group-item"><b>ActivationDate DeactivationDate</b> {{$account->ActivationDate}} {{$account->DeactivationDate}}</li>
+                      <li class="list-group-item"><b>Remark:</b> {{$account->Remark}}</li>
+                      <li class="list-group-item"><b>Bouques</b>&ensp;{{$account->transactions->count()}}</li>
+                      <li class="list-group-item"><b>Action</b></li>
+                      <!--<li class="list-group-item">Vestibulum at eros</li>-->
+                    </ul>
+					<br>
+					
+					<div class="row">
+                <div class="col-xl-12">
+                  <h6 class="text-muted">Account Details</h6>
+                  <div class="nav-align-top mb-4">
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li class="nav-item">
+                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-home" aria-controls="navs-top-home" aria-selected="true">
+                          Bouque Details
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-profile" aria-controls="navs-top-profile" aria-selected="false">
+                          Command History
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-messages" aria-controls="navs-top-messages" aria-selected="false">
+                          
+						  Previous Bouquets Details
+                        </button>
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel">
+					  @php $counter=1; 
+					  @endphp
+                      
+					  @foreach($account->transactions as $transaction)
+					   <ul class="list-group list-group-horizontal-md text-md-center">
+					  @php 	
+					  $carbon = \Illuminate\Support\Carbon::parse($transaction->CreatedOn);
+					  $date = $carbon->format('M d Y h:iA');	
+					  @endphp
+					  <li class="list-group-item"><b>{{$counter++}}</b></li>
+					  <li class="list-group-item"><b>Addedby</b> {{$transaction->createdby->NAME}} {{$date}}</li>			  
+					  <li class="list-group-item"><b>BouqueName</b> {{$transaction->bouque->BouqueName}}</li>
+					  <li class="list-group-item"><b>Amount</b> {{$transaction->bouque->Rate}}</li>
+					  @php
+					  $today = \Illuminate\Support\Carbon::today()->format('Y-m-d');
+					  $status = $transaction->DeactivationDate >= $today ? 'Active' : 'InActive';
+					  @endphp
+					  <li class="list-group-item"><b>Status</b> {{$status}}</li>
+					  <li class="list-group-item"><b>ActivationDate DeactivationDate</b> {{$transaction->ActivationDate}}&ensp;{{$transaction->DeactivationDate}}</li>
+					  <li class="list-group-item"><b>Channels</b> 
+					  
+					  @php 
+						$assets=$transaction->bouque->assets->where('ChannelId', '<>', null); 
+					  @endphp
+					  @foreach($assets as $asset)
+							{{ $asset->channel->ChannelName }}
+						@endforeach
+					  </li>
+					  <li class="list-group-item"><b>Packages </b>					  
+					  
+					  @php 
+						$assets=$transaction->bouque->assets->where('PackageId', '<>', null);
+					  @endphp
+					    @foreach($assets as $asset)
+							{{ $asset->package->PackageName }}
+						@endforeach
+					  </li>
+						</ul>
+					  @endforeach
                       </div>
-            </div>
-			</div><br>
+                      <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
+                        <p>
+                          Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
+                          cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
+                          cheesecake fruitcake.
+                        </p>
+                        <p class="mb-0">
+                          Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah
+                          cotton candy liquorice caramels.
+                        </p>
+                      </div>
+                      <div class="tab-pane fade" id="navs-top-messages" role="tabpanel">
+                        <p>
+                          Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
+                          cupcake gummi bears cake chocolate.
+                        </p>
+                        <p class="mb-0">
+                          Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
+                          roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
+                          jelly-o tart brownie jelly.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+			  </div>
+                               </div>
+							@endforeach
+                            </div>                    
+                      </div>
+            
+			<br>
 			<a class='card-link' href='{{ Request::root() }}/sms_subscribers/change-status-sms_subscribers/{{ $sms_subscriber->id }}'>
                      <i class='bx bx-windows me-1'></i>
                      @if ($sms_subscriber->status == 0)
