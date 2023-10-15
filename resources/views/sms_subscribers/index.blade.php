@@ -163,7 +163,13 @@
 					$date = $carbon->format('M d Y h:iA');
 			@endphp
 			<p class="card-text"><b>Addedby</b> {{$sms_subscriber->createdby->NAME }} <b>On</b>  {{$date}}  </p>			
-			<p class="card-text"><b>CustomerId :</b> {{$sms_subscriber->CustomerId}} <b>FormNo :</b> {{$sms_subscriber->FormNo}} </p>
+			<p class="card-text">
+			<div class="row"><div class="col-md-4 col-12 mb-3 mb-md-0">
+			<b>CustomerId :</b> {{$sms_subscriber->CustomerId}} </div>
+			<div class="col-md-4 col-12 mb-3 mb-md-0"><b>FormNo :</b> {{$sms_subscriber->FormNo}} 
+			</div>
+			</div>
+			</p>
 			<p class="card-text"><b>MobileNo</b> : {{$sms_subscriber->MobileNo}}</p>
 			<p class="card-text"><b>Operator :</b> {{$sms_subscriber->operator->NAME }} <b>CODE :</b> {{$sms_subscriber->operator->CODE }}</p>
 			<p class="card-text"><b>Society :</b> {{$sms_subscriber->society->SocietyName }} <b>Area :</b> {{$sms_subscriber->society->area->NAME }}</p>
@@ -201,12 +207,29 @@
                             <div class="tab-content p-0">
 							@foreach($sms_subscriber->accounts as $account) 
                               <div class="tab-pane fade" id="list-{{$account->Id}}">
+	@php 	$carbon = \Illuminate\Support\Carbon::parse($account->CreatedOn);
+			$date = $carbon->format('M d Y h:iA');
+			@endphp
+	<p class="card-text">
+		@if ($account->Status === 1)
+            <button type="button" class="btn rounded-pill btn-outline-primary">Active</button>
+        @else
+            <button type="button" class="btn rounded-pill btn-outline-secondary">InActive</button>
+        @endif</p>
+	<p class="card-text"><b>Addedon :</b> {{$date}}</p>
+	<p class="card-text"><b>Addedby :</b> {{$account->createdby->NAME}}</p>
+	<p class="card-text"><b>STBNo :</b> {{$account->pairing->stb->STBNo}}</p>
+	<p class="card-text"><b>SmartcardNo :</b> {{$account->pairing->smartcard->SmartcardNo}}</p>
+	<p class="card-text"><b>ActivationDate :</b> {{$account->ActivationDate}}</p>
+	<p class="card-text"><b>DeactivationDate :</b>{{$account->DeactivationDate}}</p>
+	<p class="card-text"><b>Remark :</b> {{$account->Remark}}</p>
+							  <!--<div class="tab-pane fade" id="list-{{$account->Id}}">
 								SubscriberId : {{$account->SubscriberId}}<br>
 								IsPrimary : {{$account->IsPrimary}}<br>
 								PairingId : {{$account->PairingId}}<br>
 								ActivationDate : {{$account->ActivationDate}}<br>
 								DeactivationDate : {{$account->DeactivationDate}}<br>
-								Remark : {{$account->Remark}} <br>
+								Remark : {{$account->Remark}} <br>-->
                               </div>
 							@endforeach
                             </div>

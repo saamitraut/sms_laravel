@@ -20,4 +20,12 @@ class SmsSubscriberaccount extends Eloquent
         }
         return $res;
     }
+	public function createdby()
+    {
+         return $this->belongsTo(SmsAcces::class, 'CreatedBy', 'Id');
+    }
+	public function pairing()
+    {
+         return $this->belongsTo(SmsPairing::class, 'PairingId', 'Id');
+    }
 }

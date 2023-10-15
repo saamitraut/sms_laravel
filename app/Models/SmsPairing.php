@@ -20,4 +20,12 @@ class SmsPairing extends Eloquent
         }
         return $res;
     }
+	public function smartcard()
+    {
+         return $this->belongsTo(SmsSmartcard::class, 'SmartCardId', 'Id');
+    }
+	public function stb()
+    {
+         return $this->belongsTo(SmsStb::class, 'StbId', 'Id');
+    }
 }
