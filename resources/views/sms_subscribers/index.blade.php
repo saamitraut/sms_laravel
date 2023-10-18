@@ -281,13 +281,31 @@
 											{{ $asset->channel->ChannelName}}{{ !$loop->last ? ', ' : '' }}
 										@endforeach
 									  </li>
-									  <li style="width:100%;" class="list-group-item"><b>Packages </b>					  
-									  @php 
-										$assets=$transaction->bouque->assets->where('PackageId', '<>', null);
-									  @endphp
+									  <li style="width:100%;" class="list-group-item">
+	@php $assets=$transaction->bouque->assets->where('PackageId', '<>', null);
+	@endphp
+					
+					@if ($assets->count()>1)
+					<div class="card accordion-item">
+                      <h2 class="accordion-header" id="headingTwo">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion{{$counter}}" aria-expanded="false" aria-controls="accordion{{$counter}}">
+                          Packages
+                        </button>
+                      </h2>
+                      <div id="accordion{{$counter}}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">                          
 										@foreach($assets as $asset)
-											{{ $asset->package->PackageName}}{{ !$loop->last ? ', ' : '' }}
+											<p class="card-text">{{ $asset->package->PackageName}}{{ !$loop->last ? ', ' : '' }}</p>
 										@endforeach
+                        </div>
+                      </div>
+                    </div>					
+					@else
+						<b>Packages</b>
+						@foreach($assets as $asset)
+											<p class="card-text">{{ $asset->package->PackageName}}{{ !$loop->last ? ', ' : '' }}</p>
+										@endforeach
+					@endif	
 									  </li>
 								</ul>
 							@endforeach
