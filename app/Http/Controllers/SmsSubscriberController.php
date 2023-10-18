@@ -13,13 +13,22 @@ class SmsSubscriberController extends Controller {
     public function index(Request $request)
     {
         
-		$sms_subscribers = SmsSubscriber::all();
+		$sms_subscribers = SmsSubscriber::paginate($request->get('pagination_limit', 5));
+		
+		// foreach($sms_subscribers as $sms_subscriber) {
+			// foreach($sms_subscriber->accounts as $account) {
+				//dd($account->transactions);
+				// $transactions = $account->transactions;					
+						//Group the transactions by AddedBy and CreatedOn.
+				// $groupedTransactions = $transactions->groupBy(['CreatedBy','CreatedOn','ActivationDate','DeactivationDate']);
+				// dd($groupedTransactions);
+			// }			
+		// }
 		
 		$carbon = Carbon::now();
 		$data['date'] = $carbon->format('M d Y h:iA');	
 		
-		$data['sms_subscribers'] = SmsSubscriber::all();
-        $data['sms_subscribers'] = SmsSubscriber::paginate($request->get('pagination_limit', 5));
+        $data['sms_subscribers'] = $sms_subscribers;
 		$data['SMS_OPERATOR'] = SMSOPERATOR::list();
 		$data['SMS_SOCIETY_MASTER'] = SMSSOCIETYMASTER::list();
 		// $data['SMS_SUBSCRIBERS'] = SmsSubscriber::list();

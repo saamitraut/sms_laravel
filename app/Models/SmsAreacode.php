@@ -12,9 +12,10 @@ class SmsAreacode extends Eloquent
 
     public static function list()
     {
-        $sms_areacode = self::all()->toArray();
+        $sms_areacodes = self::all()->toArray();
         $res = array();
-        foreach ($sms_areacode as $sms_areacode)
+        
+		foreach ($sms_areacodes as $sms_areacode)
         {
             $res[$sms_areacode['id']] = $sms_areacode;
         }

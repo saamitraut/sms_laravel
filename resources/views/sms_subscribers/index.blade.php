@@ -236,10 +236,13 @@
 					  $transactions = $account->transactions;					
 					
 						// Group the transactions by AddedBy and CreatedOn.
-						$groupedTransactions = $transactions->groupBy('CreatedBy','CreatedOn','ActivationDate','DeactivationDate');
+						$res = $transactions->groupBy('ActivationDate');
 					   @endphp
+				@foreach($res as $row)
+				
+				@php	$groupedTransactions = $row->groupBy('DeActivationDate'); @endphp
+				
 				@foreach($groupedTransactions as $group)
-					  
 					  @php 							
 							$group_number=$group_number+1;			
 					  @endphp
@@ -248,6 +251,8 @@
                         <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion{{$group_number}}" aria-expanded="false" aria-controls="accordion{{$group_number}}">
                           <ul class="list-group list-group-horizontal-md text-md-center">						  
 						  <li style="width:100%;" class="list-group-item"><b>Addedby</b>&ensp;{{$group->first()->createdby->NAME}}</li>
+	@php 	$carbon = \Illuminate\Support\Carbon::parse($group->first()->CreatedOn);
+									$date = $carbon->format('Y-m-d');	@endphp
 						  <li style="width:100%;" class="list-group-item"><b>AddedOn</b>&ensp;{{$date}}</li>
 						  <li style="width:100%;" class="list-group-item"><b>ActivationDate</b> {{$group->first()->ActivationDate}}</li>
 						  <li style="width:100%;" class="list-group-item"><b>DeactivationDate</b> {{$group->first()->DeactivationDate}}</li>
@@ -265,6 +270,7 @@
 							@foreach($group as $transaction)
 								<ul class="list-group list-group-horizontal-md text-md-center">
 									  <li style="width:10em;" class="list-group-item"><b>{{$counter++}}</b></li>
+									  <li style="width:100%;" class="list-group-item"><b>{{$transaction->ActivationDate}}</b></li>
 									  <li style="width:100%;" class="list-group-item"><b>Bouque</b> {{$transaction->bouque->BouqueName}}</li>
 									  <li style="width:100%;" class="list-group-item"><b>Amount</b> {{$transaction->bouque->Rate}}</li>	 
 									  <li style="width:100%;" class="list-group-item"><b>Channels</b> 
@@ -272,7 +278,7 @@
 										$assets=$transaction->bouque->assets->where('ChannelId', '<>', null); 
 									  @endphp
 									  @foreach($assets as $asset)
-											{{ $asset->channel->ChannelName }}
+											{{ $asset->channel->ChannelName}}{{ !$loop->last ? ', ' : '' }}
 										@endforeach
 									  </li>
 									  <li style="width:100%;" class="list-group-item"><b>Packages </b>					  
@@ -280,7 +286,7 @@
 										$assets=$transaction->bouque->assets->where('PackageId', '<>', null);
 									  @endphp
 										@foreach($assets as $asset)
-											{{ $asset->package->PackageName }}
+											{{ $asset->package->PackageName}}{{ !$loop->last ? ', ' : '' }}
 										@endforeach
 									  </li>
 								</ul>
@@ -289,6 +295,7 @@
                       </div>
                     </div>
 						
+				@endforeach
 				@endforeach
 					  
                       </div>
