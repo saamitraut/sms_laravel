@@ -210,7 +210,7 @@
                   <div class="nav-align-top mb-4">
                     <ul class="nav nav-tabs" role="tablist">
                       <li class="nav-item">
-                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-home" aria-controls="navs-top-home" aria-selected="true">
+                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-transactions" aria-controls="navs-top-transactions" aria-selected="true">
                           Bouque Details
                         </button>
                       </li>
@@ -227,46 +227,70 @@
                       </li>
                     </ul>
                     <div class="tab-content">
-                      <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel">
-					  @php $counter=1; 
-					  @endphp
+                      <div class="tab-pane fade show active" id="navs-top-transactions" role="tabpanel">
+					  
+					  @php 
+					  
+					  $counter=1;	$group_number=0;				 
                       
-					  @foreach($account->transactions as $transaction)
-					   <ul class="list-group list-group-horizontal-md text-md-center">
-					  @php 	
-					  $carbon = \Illuminate\Support\Carbon::parse($transaction->CreatedOn);
-					  $date = $carbon->format('M d Y h:iA');	
-					  @endphp
-					  <li class="list-group-item"><b>{{$counter++}}</b></li>
-					  <li class="list-group-item"><b>Addedby</b> {{$transaction->createdby->NAME}} {{$date}}</li>			  
-					  <li class="list-group-item"><b>BouqueName</b> {{$transaction->bouque->BouqueName}}</li>
-					  <li class="list-group-item"><b>Amount</b> {{$transaction->bouque->Rate}}</li>
-					  @php
-					  $today = \Illuminate\Support\Carbon::today()->format('Y-m-d');
-					  $status = $transaction->DeactivationDate >= $today ? 'Active' : 'InActive';
-					  @endphp
-					  <li class="list-group-item"><b>Status</b> {{$status}}</li>
-					  <li class="list-group-item"><b>ActivationDate DeactivationDate</b> {{$transaction->ActivationDate}}&ensp;{{$transaction->DeactivationDate}}</li>
-					  <li class="list-group-item"><b>Channels</b> 
+					  $transactions = $account->transactions;					
+					
+						// Group the transactions by AddedBy and CreatedOn.
+						$groupedTransactions = $transactions->groupBy('CreatedBy','CreatedOn','ActivationDate','DeactivationDate');
+					   @endphp
+				@foreach($groupedTransactions as $group)
 					  
-					  @php 
-						$assets=$transaction->bouque->assets->where('ChannelId', '<>', null); 
+					  @php 							
+							$group_number=$group_number+1;			
 					  @endphp
-					  @foreach($assets as $asset)
-							{{ $asset->channel->ChannelName }}
-						@endforeach
-					  </li>
-					  <li class="list-group-item"><b>Packages </b>					  
+					<div class="card accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion{{$group_number}}" aria-expanded="false" aria-controls="accordion{{$group_number}}">
+                          <ul class="list-group list-group-horizontal-md text-md-center">						  
+						  <li style="width:100%;" class="list-group-item"><b>Addedby</b>&ensp;{{$group->first()->createdby->NAME}}</li>
+						  <li style="width:100%;" class="list-group-item"><b>AddedOn</b>&ensp;{{$date}}</li>
+						  <li style="width:100%;" class="list-group-item"><b>ActivationDate</b> {{$group->first()->ActivationDate}}</li>
+						  <li style="width:100%;" class="list-group-item"><b>DeactivationDate</b> {{$group->first()->DeactivationDate}}</li>
+							@php
+							  $today = \Illuminate\Support\Carbon::today()->format('Y-m-d');
+							  $status = $group->first()->DeactivationDate >= $today ? 'Active' : 'InActive';
+							@endphp					
+						  <li style="width:100%;" class="list-group-item"><b>Status</b> {{$status}}</li>
+						  </ul>
+                        </button>
+                      </h2>
+
+                      <div id="accordion{{$group_number}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body">
+							@foreach($group as $transaction)
+								<ul class="list-group list-group-horizontal-md text-md-center">
+									  <li style="width:10em;" class="list-group-item"><b>{{$counter++}}</b></li>
+									  <li style="width:100%;" class="list-group-item"><b>Bouque</b> {{$transaction->bouque->BouqueName}}</li>
+									  <li style="width:100%;" class="list-group-item"><b>Amount</b> {{$transaction->bouque->Rate}}</li>	 
+									  <li style="width:100%;" class="list-group-item"><b>Channels</b> 
+									  @php 
+										$assets=$transaction->bouque->assets->where('ChannelId', '<>', null); 
+									  @endphp
+									  @foreach($assets as $asset)
+											{{ $asset->channel->ChannelName }}
+										@endforeach
+									  </li>
+									  <li style="width:100%;" class="list-group-item"><b>Packages </b>					  
+									  @php 
+										$assets=$transaction->bouque->assets->where('PackageId', '<>', null);
+									  @endphp
+										@foreach($assets as $asset)
+											{{ $asset->package->PackageName }}
+										@endforeach
+									  </li>
+								</ul>
+							@endforeach
+                        </div>
+                      </div>
+                    </div>
+						
+				@endforeach
 					  
-					  @php 
-						$assets=$transaction->bouque->assets->where('PackageId', '<>', null);
-					  @endphp
-					    @foreach($assets as $asset)
-							{{ $asset->package->PackageName }}
-						@endforeach
-					  </li>
-						</ul>
-					  @endforeach
                       </div>
                       <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
                         <p>
@@ -452,7 +476,6 @@
 @endif
 
 <!-- ... (pagination) ... -->
-
 </div></div>
 
 @include('includes.footer')
