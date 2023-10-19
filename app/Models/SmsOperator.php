@@ -20,4 +20,8 @@ class SmsOperator extends Eloquent
         }
         return $res;
     }
+	public function assets()
+    {
+        return $this->hasMany(SmsOperatorAsset::class, 'OperatorId', 'ID');
+    }
 }

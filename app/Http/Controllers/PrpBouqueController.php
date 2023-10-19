@@ -1,8 +1,8 @@
 <?php 
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PrpBouque as PrpBouque;
+use App\Models\PackageType as PackageType;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
@@ -11,15 +11,29 @@ class PrpBouqueController extends Controller {
 
     public function index(Request $request)
     {
-        $data['prp_bouques'] = PrpBouque::all();
-        $data['prp_bouques'] = PrpBouque::paginate($request->get('pagination_limit', 5));
-        $data['columnNames'] = ['Id','BouqueCode','BouqueName','Rate','LCOSharing','BType','Status','AType','Description','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','isRio','RIOAlaCarte1Count','RIOAlaCarte2Count','PackageTypeId','MRP'];
-        return view('prp_bouques/index', $data);
-    }
+        $data['prp_bouque'] = PrpBouque::all();
+        $data['prp_bouque'] = PrpBouque::paginate($request->get('pagination_limit', 5));
+        $data['columnNames'] = ['Id','BouqueCode','BouqueName','Rate','LCOSharing','BType','Status','AType','Description','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','isRio','RIOAlaCarte1Count','RIOAlaCarte2Count','PackageTypeId','MRP','broadcaster_id'];
+        
+		$package_types = PackageType::all();		
+		
+		// foreach($package_types as $package_type){
+			// echo $package_type->id,'\n';
+			// echo $package_type->name,'\n';
+		// }
+		// exit;
+		$data['package_types'] = $package_types;		
+		
+		// dd($data);
+		
+		return view('prp_bouque/index', $data); 
+	
+	
+	}
 
     public function add()
     {
-        return view('prp_bouques/add');
+        return view('prp_bouque/add');
     }
 
     public function addPost()
@@ -45,27 +59,28 @@ class PrpBouqueController extends Controller {
              'RIOAlaCarte2Count' => Input::get('RIOAlaCarte2Count'),
              'PackageTypeId' => Input::get('PackageTypeId'),
              'MRP' => Input::get('MRP'),
+             'broadcaster_id' => Input::get('broadcaster_id'),
         );
         $PrpBouque_id = PrpBouque::insert($PrpBouque_data);
-        return redirect('prp_bouques')->with('message', 'PrpBouque successfully added');
+        return redirect('prp_bouque')->with('message', 'PrpBouque successfully added');
     }
 
     public function delete($id)
     {
         $PrpBouque = PrpBouque::find($id);
         $PrpBouque->delete();
-        return redirect('prp_bouques')->with('message', 'PrpBouque deleted successfully.');
+        return redirect('prp_bouque')->with('message', 'PrpBouque deleted successfully.');
     }
 
     public function edit($id)
     {
-        $data['prp_bouques'] = PrpBouque::find($id);
-        return view('prp_bouques/edit', $data);
+        $data['prp_bouque'] = PrpBouque::find($id);
+        return view('prp_bouque/edit', $data);
     }
 
     public function editPost()
     {
-        $id = Input::get('prp_bouques_id');
+        $id = Input::get('prp_bouque_id');
 
         $data = array(
           'Id' => Input::get('Id'),
@@ -88,9 +103,10 @@ class PrpBouqueController extends Controller {
           'RIOAlaCarte2Count' => Input::get('RIOAlaCarte2Count'),
           'PackageTypeId' => Input::get('PackageTypeId'),
           'MRP' => Input::get('MRP'),
+          'broadcaster_id' => Input::get('broadcaster_id'),
         );
         PrpBouque::where('id', '=', $id)->update($data);
-        return redirect('prp_bouques')->with('message', 'PrpBouque Updated successfully');
+        return redirect('prp_bouque')->with('message', 'PrpBouque Updated successfully');
     }
 
     public function changeStatus($id)
@@ -98,13 +114,13 @@ class PrpBouqueController extends Controller {
         $PrpBouque = PrpBouque::find($id);
         $PrpBouque->status = !$PrpBouque->status;
         $PrpBouque->save();
-        return redirect('prp_bouques')->with('message', 'Change PrpBouque status successfully');
+        return redirect('prp_bouque')->with('message', 'Change PrpBouque status successfully');
     }
 
     public function view($id)
     {
         $data['PrpBouque'] = PrpBouque::find($id);
-        return view('prp_bouques/view', $data);
+        return view('prp_bouque/view', $data);
     }
 
     // Add other methods here...

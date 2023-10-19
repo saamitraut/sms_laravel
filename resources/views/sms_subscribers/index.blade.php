@@ -199,10 +199,126 @@
                       <li class="list-group-item"><b>ActivationDate DeactivationDate</b> {{$account->ActivationDate}} {{$account->DeactivationDate}}</li>
                       <li class="list-group-item"><b>Remark:</b> {{$account->Remark}}</li>
                       <li class="list-group-item"><b>Bouques</b>&ensp;{{$account->transactions->count()}}</li>
-                      <li class="list-group-item"><b>Action</b></li>
+                      <li class="list-group-item"><b>Action</b><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalScrollable">
+                          Add Bouque
+                        </button></li>
                       <!--<li class="list-group-item">Vestibulum at eros</li>-->
                     </ul>
 					<br>
+					
+					<div class="modal fade" id="modalScrollable" tabindex="-1" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="modalScrollableTitle">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <p>
+							@php $assets=$sms_subscriber->operator->assets; 
+							@endphp
+								@foreach ($assets as $asset)
+								@if ($asset->bouquet->AType==1)
+									<p class="card-text">{{$asset->bouquet->BouqueName}} {{$asset->bouquet->AType}}</p>
+								@endif
+								@endforeach							
+                             
+							  
+							@php
+   $primary_assets = $sms_subscriber->operator->assets->filter(function ($asset) {
+       return $asset->bouquet->AType == 1;
+   });
+@endphp
+
+@foreach ($primary_assets as $asset)
+   {{ $asset->bouquet->BouqueName }} {{ $asset->bouquet->AType }}
+@endforeach
+
+								 </p>
+                              <p>
+                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                                lacus vel augue laoreet rutrum faucibus dolor auctor.
+                              </p>
+                              <p>
+                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
+                                scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
+                                auctor fringilla.
+                              </p>
+                              <p>
+                                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+                                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                              </p>
+                              <p>
+                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                                lacus vel augue laoreet rutrum faucibus dolor auctor.
+                              </p>
+                              <p>
+                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
+                                scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
+                                auctor fringilla.
+                              </p>
+                              <p>
+                                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+                                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                              </p>
+                              <p>
+                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                                lacus vel augue laoreet rutrum faucibus dolor auctor.
+                              </p>
+                              <p>
+                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
+                                scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
+                                auctor fringilla.
+                              </p>
+                              <p>
+                                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+                                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                              </p>
+                              <p>
+                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                                lacus vel augue laoreet rutrum faucibus dolor auctor.
+                              </p>
+                              <p>
+                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
+                                scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
+                                auctor fringilla.
+                              </p>
+                              <p>
+                                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+                                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                              </p>
+                              <p>
+                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                                lacus vel augue laoreet rutrum faucibus dolor auctor.
+                              </p>
+                              <p>
+                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
+                                scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
+                                auctor fringilla.
+                              </p>
+                              <p>
+                                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+                                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                              </p>
+                              <p>
+                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                                lacus vel augue laoreet rutrum faucibus dolor auctor.
+                              </p>
+                              <p>
+                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
+                                scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
+                                auctor fringilla.
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Close
+                              </button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>					
 					
 					<div class="row">
                 <div class="col-xl-12">

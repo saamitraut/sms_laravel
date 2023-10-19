@@ -342,3 +342,51 @@ Route::group(array('prefix' => 'sms_package'), function() {
     Route::get('/view-sms_package/{id}', 'SmsPackageController@view');
 });
 // end of sms_package routes
+// routes for sms_operator_assets.
+Route::group(array('prefix' => 'sms_operator_assets'), function() {
+    Route::get('/', 'SmsOperatorAssetController@index');
+    Route::get('/add-sms_operator_assets', 'SmsOperatorAssetController@add');
+    Route::post('/add-sms_operator_assets-post', 'SmsOperatorAssetController@addPost');
+    Route::get('/delete-sms_operator_assets/{id}', 'SmsOperatorAssetController@delete');
+    Route::get('/edit-sms_operator_assets/{id}', 'SmsOperatorAssetController@edit');
+    Route::post('/edit-sms_operator_assets-post', 'SmsOperatorAssetController@editPost');
+    Route::get('/change-status-sms_operator_assets/{id}', 'SmsOperatorAssetController@changeStatus');
+    Route::get('/view-sms_operator_assets/{id}', 'SmsOperatorAssetController@view');
+});
+// end of sms_operator_assets routes
+// routes for prp_demobouque.
+Route::group(array('prefix' => 'prp_demobouque'), function() {
+    Route::get('/', 'PrpDemobouqueController@index');
+    Route::get('/add-prp_demobouque', 'PrpDemobouqueController@add');
+    Route::post('/add-prp_demobouque-post', 'PrpDemobouqueController@addPost');
+    Route::get('/delete-prp_demobouque/{id}', 'PrpDemobouqueController@delete');
+    Route::get('/edit-prp_demobouque/{id}', 'PrpDemobouqueController@edit');
+    Route::post('/edit-prp_demobouque-post', 'PrpDemobouqueController@editPost');
+    Route::get('/change-status-prp_demobouque/{id}', 'PrpDemobouqueController@changeStatus');
+    Route::get('/view-prp_demobouque/{id}', 'PrpDemobouqueController@view');
+});
+// end of prp_demobouque routes
+// routes for prp_bouque.
+Route::group(array('prefix' => 'prp_bouque'), function() {
+    Route::get('/', 'PrpBouqueController@index');
+    Route::get('/add-prp_bouque', 'PrpBouqueController@add');
+    Route::post('/add-prp_bouque-post', 'PrpBouqueController@addPost');
+    Route::get('/delete-prp_bouque/{id}', 'PrpBouqueController@delete');
+    Route::get('/edit-prp_bouque/{id}', 'PrpBouqueController@edit');
+    Route::post('/edit-prp_bouque-post', 'PrpBouqueController@editPost');
+    Route::get('/change-status-prp_bouque/{id}', 'PrpBouqueController@changeStatus');
+    Route::get('/view-prp_bouque/{id}', 'PrpBouqueController@view');
+});
+// end of prp_bouque routes
+// routes for package_types.
+Route::group(array('prefix' => 'package_types'), function() {
+    Route::get('/', 'PackageTypeController@index');
+    Route::get('/add-package_types', 'PackageTypeController@add');
+    Route::post('/add-package_types-post', 'PackageTypeController@addPost');
+    Route::get('/delete-package_types/{id}', 'PackageTypeController@delete');
+    Route::get('/edit-package_types/{id}', 'PackageTypeController@edit');
+    Route::post('/edit-package_types-post', 'PackageTypeController@editPost');
+    Route::get('/change-status-package_types/{id}', 'PackageTypeController@changeStatus');
+    Route::get('/view-package_types/{id}', 'PackageTypeController@view');
+});
+// end of package_types routes

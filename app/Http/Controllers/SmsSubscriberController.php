@@ -15,6 +15,8 @@ class SmsSubscriberController extends Controller {
         
 		$sms_subscribers = SmsSubscriber::paginate($request->get('pagination_limit', 5));
 		
+					// dd($sms_subscribers->first()->OperatorId);
+		
 		// foreach($sms_subscribers as $sms_subscriber) {
 			// foreach($sms_subscriber->accounts as $account) {
 				//dd($account->transactions);
