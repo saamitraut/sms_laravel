@@ -16,8 +16,8 @@
     type="button"
     class="btn btn-primary"
     data-bs-toggle="modal"
-    data-bs-target="#basicModal" style="margin-bottom: 15px"
->Add prp_bouque </button>
+    data-bs-target="#addBouque" style="margin-bottom: 15px"
+>Add Bouque </button>
             <!--Button trigger Add modal end-->
             <!--Button trigger Search modal -->
 <button
@@ -29,59 +29,8 @@ data-bs-target="#search" style="margin-bottom: 15px"
 Search
 </button>
 			<!-- Button trigger Search modal End -->
-<!-- Modal -->
-<div class="modal fade" id="search" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel1">Search PackageType </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-          <form role="form" method="post" action="/prp_bouque/" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <div class="mb-3">
-                        <label for="package_type" class="form-label">PackageType</label>
-                        <select id="package_type" name="package_type" class="form-select">
-						 <option>Default select</option>
-						@foreach ($package_types as $package_type)
-						<option value="{{$package_type->id}}">{{$package_type->name}}</option>
-						@endforeach
-                        </select>
-              </div>
-			  <div class="mb-3">
-                        <label for="broadcaster" class="form-label">Broadcaster</label>
-                        <select id="broadcaster" name="broadcaster" class="form-select">
-						 <option>Default select</option>
-						@foreach ($broadcasters as $broadcaster) 
-						<option value="{{$broadcaster->ID}}">{{$broadcaster->BROADCASTERNAME}}</option>
-						@endforeach
-                        </select>
-              </div>
-			  <div>
-                        <label for="defaultFormControlInput" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp">
-                        <div id="defaultFormControlHelp" class="form-text">
-                          We'll never share your details with anyone else.
-                        </div>
-                      </div>
-              
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="submit" class="btn btn-primary">Search</button> </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal end -->
+@include('prp_bouque.search')
+
 <div class="btn - group" style="margin-bottom: 15px">
                           <button type = "button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Pagination
@@ -99,146 +48,13 @@ Search
         }
 });
 </script >
-<!-- Modal -->
-<div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Add prp_bouque</h5 >
-                <button 
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                ></button>
-            </div>
-            <div class="modal-body">
-                 <form role="form" method="post" action="/prp_bouque/add-prp_bouque-post" >
-                          <input type="hidden" name="_token" value="{{ csrf_token() }}" >
-           
-    <div class="form-group">
-        
-        <label for="Id">Id:</label>
-        <input type="text" class="form-control" id="Id" name="Id">
-    </div>
-    <div class="form-group">
-        
-        <label for="BouqueCode">BouqueCode:</label>
-        <input type="text" class="form-control" id="BouqueCode" name="BouqueCode">
-    </div>
-    <div class="form-group">
-        
-        <label for="BouqueName">BouqueName:</label>
-        <input type="text" class="form-control" id="BouqueName" name="BouqueName">
-    </div>
-    <div class="form-group">
-        
-        <label for="Rate">Rate:</label>
-        <input type="text" class="form-control" id="Rate" name="Rate">
-    </div>
-    <div class="form-group">
-        
-        <label for="LCOSharing">LCOSharing:</label>
-        <input type="text" class="form-control" id="LCOSharing" name="LCOSharing">
-    </div>
-    <div class="form-group">
-        
-        <label for="BType">BType:</label>
-        <input type="text" class="form-control" id="BType" name="BType">
-    </div>
-    <div class="form-group">
-        
-        <label for="Status">Status:</label>
-        <input type="text" class="form-control" id="Status" name="Status">
-    </div>
-    <div class="form-group">
-        
-        <label for="AType">AType:</label>
-        <input type="text" class="form-control" id="AType" name="AType">
-    </div>
-    <div class="form-group">
-        
-        <label for="Description">Description:</label>
-        <input type="text" class="form-control" id="Description" name="Description">
-    </div>
-    <div class="form-group">
-        
-        <label for="CreatedOn">CreatedOn:</label>
-        <input type="text" class="form-control" id="CreatedOn" name="CreatedOn">
-    </div>
-    <div class="form-group">
-        
-        <label for="CreatedBy">CreatedBy:</label>
-        <input type="text" class="form-control" id="CreatedBy" name="CreatedBy">
-    </div>
-    <div class="form-group">
-        
-        <label for="UpdatedOn">UpdatedOn:</label>
-        <input type="text" class="form-control" id="UpdatedOn" name="UpdatedOn">
-    </div>
-    <div class="form-group">
-        
-        <label for="UpdatedBy">UpdatedBy:</label>
-        <input type="text" class="form-control" id="UpdatedBy" name="UpdatedBy">
-    </div>
-    <div class="form-group">
-        
-        <label for="Deleted">Deleted:</label>
-        <input type="text" class="form-control" id="Deleted" name="Deleted">
-    </div>
-    <div class="form-group">
-        
-        <label for="Remark">Remark:</label>
-        <input type="text" class="form-control" id="Remark" name="Remark">
-    </div>
-    <div class="form-group">
-        
-        <label for="isRio">isRio:</label>
-        <input type="text" class="form-control" id="isRio" name="isRio">
-    </div>
-    <div class="form-group">
-        
-        <label for="RIOAlaCarte1Count">RIOAlaCarte1Count:</label>
-        <input type="text" class="form-control" id="RIOAlaCarte1Count" name="RIOAlaCarte1Count">
-    </div>
-    <div class="form-group">
-        
-        <label for="RIOAlaCarte2Count">RIOAlaCarte2Count:</label>
-        <input type="text" class="form-control" id="RIOAlaCarte2Count" name="RIOAlaCarte2Count">
-    </div>
-    <div class="form-group">
-        
-        <label for="PackageTypeId">PackageTypeId:</label>
-        <input type="text" class="form-control" id="PackageTypeId" name="PackageTypeId">
-    </div>
-    <div class="form-group">
-        
-        <label for="MRP">MRP:</label>
-        <input type="text" class="form-control" id="MRP" name="MRP">
-    </div>
-    <div class="form-group">
-        
-        <label for="broadcaster_id">broadcaster_id:</label>
-        <input type="text" class="form-control" id="broadcaster_id" name="broadcaster_id">
-    </div>
-                </div >
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="submit" class="btn btn-primary">Save changes</button> </form>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- Modal end -->
+@include('prp_bouque.add')
 @if(count($prp_bouque)>0)
   <table class="table table-hover">
     <thead>
       <tr>
         <th>AddedOn AddedBy</th>
          <th>BouquetName Code</th>
-		
 		<th>Rate LcoSharing</th>
 		<th>Allocation Type</th>
 		<th>Box Type</th>

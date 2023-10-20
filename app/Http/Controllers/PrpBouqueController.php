@@ -12,8 +12,7 @@ class PrpBouqueController extends Controller {
 
     public function index(Request $request)
     {
-        // $data['prp_bouque'] = PrpBouque::all();
-        $data['prp_bouque'] = PrpBouque::paginate($request->get('pagination_limit', 5));
+        $data['prp_bouque'] = PrpBouque::orderBy('Id', 'desc')->paginate($request->get('pagination_limit', 5));
         $data['columnNames'] = ['Id','BouqueCode','BouqueName','Rate','LCOSharing','BType','Status','AType','Description','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','isRio','RIOAlaCarte1Count','RIOAlaCarte2Count','PackageTypeId','MRP','broadcaster_id'];
         
 		$package_types = PackageType::all();		
@@ -35,10 +34,10 @@ class PrpBouqueController extends Controller {
         return view('prp_bouque/add');
     }
 
-    public function addPost()
+    public function addPost(Request $request  )
     {
-        $PrpBouque_data = array(
-             'Id' => Input::get('Id'),
+        
+		$PrpBouque_data = array(
              'BouqueCode' => Input::get('BouqueCode'),
              'BouqueName' => Input::get('BouqueName'),
              'Rate' => Input::get('Rate'),
@@ -47,20 +46,12 @@ class PrpBouqueController extends Controller {
              'Status' => Input::get('Status'),
              'AType' => Input::get('AType'),
              'Description' => Input::get('Description'),
-             'CreatedOn' => Input::get('CreatedOn'),
-             'CreatedBy' => Input::get('CreatedBy'),
-             'UpdatedOn' => Input::get('UpdatedOn'),
-             'UpdatedBy' => Input::get('UpdatedBy'),
-             'Deleted' => Input::get('Deleted'),
-             'Remark' => Input::get('Remark'),
-             'isRio' => Input::get('isRio'),
-             'RIOAlaCarte1Count' => Input::get('RIOAlaCarte1Count'),
-             'RIOAlaCarte2Count' => Input::get('RIOAlaCarte2Count'),
              'PackageTypeId' => Input::get('PackageTypeId'),
-             'MRP' => Input::get('MRP'),
              'broadcaster_id' => Input::get('broadcaster_id'),
+			 'CreatedBy' => $request->user()->id
         );
-        $PrpBouque_id = PrpBouque::insert($PrpBouque_data);
+        
+		$PrpBouque_id = PrpBouque::insert($PrpBouque_data);
         return redirect('prp_bouque')->with('message', 'PrpBouque successfully added');
     }
 
