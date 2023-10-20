@@ -111,7 +111,7 @@ class PrpBouqueController extends Controller {
     public function changeStatus($id)
     {
         $PrpBouque = PrpBouque::find($id);
-        $PrpBouque->status = !$PrpBouque->status;
+        $PrpBouque->Status = !$PrpBouque->Status;
         $PrpBouque->save();
         return redirect('prp_bouque')->with('message', 'Change PrpBouque status successfully');
     }

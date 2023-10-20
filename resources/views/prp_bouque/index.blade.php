@@ -244,8 +244,8 @@ Search
 		<th>Box Type</th>
 		<th>Status</th>
 		<th>Type</th>
-		<th>Package</th>
-		<th>Alacarte</th>
+		<th>Packages</th>
+		<th>Channels</th>
 		<th>Action</th>
 	  </tr>
     </thead>
@@ -256,37 +256,72 @@ Search
 	    @php 	
 			$carbon = \Illuminate\Support\Carbon::parse ($row->CreatedOn);
 			$date = $carbon->format('M d Y h:iA');			
-			$package_assets=$row->assets->where('PackageId', '<>', null);
-			$alacarte_assets=$row->assets->where('ChannelId', '<>', null);
 		@endphp
-        <td> {{$date}}&ensp;{{$row->createdby->NAME}} </td>
+        
+		<td> {{$date}}&ensp;{{$row->createdby->NAME}} </td>
         <td> {{$row->BouqueName}} {{$row->BouqueCode }}</td>
         <td> {{round($row->Rate,2) }} &ensp;{{$row->LCOSharing }}</td>
        <td> {{$row->AType?'Primary':'Secondary'}}</td>      
        <td> {{$row->BType?'HD':'SD'}}</td>      
        <td> {{$row->Status?'ACTIVE':'INACTIVE'}}</td> 
        <td> {{$row->packagetype->name}}</td> 
-		@if($package_assets->count())
-		<td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#packages{{$i}}">{{$package_assets->count()}}</button></td>
-		@else <td></td>
+		
+		
+		@if($row->package_assets->count())
+		@if($row->package_assets->count()==1)
+		<td>{{$row->package_assets->first()->package->PackageName}}</td>
+		@else
+		<td><div class="dropdown">            
+            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+              {{$row->package_assets->count()}}
+            </button>
+            <div class="dropdown-menu">
+				@foreach($row->package_assets as $asset)
+					<p class="dropdown-item">{{ $asset->package->PackageName}}{{ !$loop->last ? ', ' : '' }}</p>
+				@endforeach
+            </div>
+          </div>
+		</td>
 		@endif
-		@if($alacarte_assets->count())
-		<td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alacarte{{$i}}">{{$alacarte_assets->count()}}</button></td>
+		@else <td></td>		
+		@endif
+		
+		@if($row->channel_assets->count())
+		@if($row->channel_assets->count()==1)
+		<td>{{$row->channel_assets->first()->channel->ChannelName}}</td>
+		@else
+		<td><div class="dropdown">            
+            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+              {{$row->channel_assets->count()}}
+            </button>
+            <div class="dropdown-menu">
+				@foreach($row->channel_assets as $asset)
+					<p class="dropdown-item">{{ $asset->channel->ChannelName}}{{ !$loop->last ? ', ' : '' }}</p>
+				@endforeach
+              
+            </div>
+          </div></td>
+		@endif
 		@else
 		<td></td>
 		@endif
+		
 		<td><div class="dropdown">            
             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
               <i class="bx bx-dots-vertical-rounded"></i>
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{Request::root()}}/prp_bouque/change-status-prp_bouque/{{$row->id }}"
-                ><i class="bx bx-windows me-1"></i> @if($row->status==0) {{"Activate"}}  @else {{"Dectivate"}} @endif</a
-              >
-              <a class="dropdown-item" href="{{Request::root()}}/prp_bouque/edit-prp_bouque/{{$row->id}}"
-                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-              >
-              <a class="dropdown-item" href="{{Request::root()}}/prp_bouque/delete-prp_bouque/{{$row->id}}" onclick="return confirm('are you sure to delete')"
+              <a class="dropdown-item" href="{{Request::root()}}/prp_bouque/change-status-prp_bouque/{{$row->Id }}"
+                ><i class="bx bx-windows me-1"></i>{{ $row->Status ? "DeActivate" : "Activate" }}  </a>
+              <a
+                     data-bs-toggle='modal'
+                     data-bs-target='#edit{{ $i }}'
+                     class='dropdown-item card-link'
+                     href='#'
+                 >
+                     <i class="bx bx-edit-alt me-1"></i> Edit
+                 </a>
+              <a class="dropdown-item" href="{{Request::root()}}/prp_bouque/delete-prp_bouque/{{$row->Id}}" onclick="return confirm('are you sure to delete')"
                 ><i class="bx bx-trash me-1"></i> Delete</a
               >
             </div>
@@ -299,7 +334,7 @@ Search
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-							@foreach($package_assets as $asset)
+							@foreach($row->package_assets as $asset)
 							<p class="card-text">{{ $asset->package->PackageName}}{{ !$loop->last ? ', ' : '' }}</p>
 							@endforeach
                             </div>
@@ -319,7 +354,7 @@ Search
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-									  @foreach($alacarte_assets as $asset)
+									  @foreach($row->channel_assets as $asset)
 											{{ $asset->channel->ChannelName}}{{ !$loop->last ? ', ' : '' }}
 										@endforeach
                             </div>
@@ -378,7 +413,7 @@ Search
                  </a>
                  <a
                      data-bs-toggle='modal'
-                     data-bs-target='#basicModall{{ $i }}'
+                     data-bs-target='#edit{{ $i }}'
                      class='card-link'
                      href='#'
                  >
@@ -395,7 +430,7 @@ Search
          </div>
          
 <!-- Modal edit starts -->
-<div class='modal fade' id='basicModall{{ $i }}' tabindex='-1' aria-hidden='true'>
+<div class='modal fade' id='edit{{ $i }}' tabindex='-1' aria-hidden='true'>
     <div class='modal-dialog' role='document'>
         <div class='modal-content'>
             <div class='modal-header'>
