@@ -24,5 +24,12 @@ class PrpBouque extends Eloquent
     {
         return $this->hasMany(PrpBouqueAsset::class, 'BouqueId', 'Id');
     }
-
+	public function createdby()
+    {
+         return $this->belongsTo(SmsAcces::class, 'CreatedBy', 'Id');
+    }
+	public function packagetype()
+    {
+         return $this->belongsTo(PackageType::class, 'PackageTypeId', 'id');
+    }
 }

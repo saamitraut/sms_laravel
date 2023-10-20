@@ -11,25 +11,26 @@
                         <strong><span class="glyphicon glyphicon-ok"></span>{{  Session::get('message') }}</strong>
                     </div>
     @endif
-            <!--Button trigger modal -->
+            <!--Button trigger Add modal -->
 <button
     type="button"
     class="btn btn-primary"
     data-bs-toggle="modal"
     data-bs-target="#basicModal" style="margin-bottom: 15px"
 >Add prp_bouque </button>
-<!-- Search start -->
+            <!--Button trigger Add modal end-->
+            <!--Button trigger Search modal -->
 <button
 type="button"
 class="btn btn-primary"
 data-bs-toggle="modal"
-data-bs-target="#basicModal2" style="margin-bottom: 15px"
+data-bs-target="#search" style="margin-bottom: 15px"
 >
 Search
 </button>
-<!-- Search End -->
+			<!-- Button trigger Search modal End -->
 <!-- Modal -->
-<div class="modal fade" id="basicModal2" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="search" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -42,23 +43,33 @@ Search
         ></button>
       </div>
       <div class="modal-body">
-          <form role="form" method="post" action="/requiredfor_master/" >
+          <form role="form" method="post" action="/prp_bouque/" >
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        
-			<div class="mb-3">
-                <label for="name" class="col-md-2 col-form-label">PackageType</label>
-                <div class="col-md-10"><input class="form-control" type="text" value="" id="name" name="name" required>
-                </div>
-				<div class="mb-3">
+                <div class="mb-3">
                         <label for="package_type" class="form-label">PackageType</label>
-                        <select id="defaultSelect" class="form-select">
+                        <select id="package_type" name="package_type" class="form-select">
 						 <option>Default select</option>
 						@foreach ($package_types as $package_type)
 						<option value="{{$package_type->id}}">{{$package_type->name}}</option>
 						@endforeach
                         </select>
-                </div>
               </div>
+			  <div class="mb-3">
+                        <label for="broadcaster" class="form-label">Broadcaster</label>
+                        <select id="broadcaster" name="broadcaster" class="form-select">
+						 <option>Default select</option>
+						@foreach ($broadcasters as $broadcaster) 
+						<option value="{{$broadcaster->ID}}">{{$broadcaster->BROADCASTERNAME}}</option>
+						@endforeach
+                        </select>
+              </div>
+			  <div>
+                        <label for="defaultFormControlInput" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp">
+                        <div id="defaultFormControlHelp" class="form-text">
+                          We'll never share your details with anyone else.
+                        </div>
+                      </div>
               
       </div>
       <div class="modal-footer">
@@ -221,6 +232,116 @@ Search
         </div>
     </div>
 <!-- Modal end -->
+@if(count($prp_bouque)>0)
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>AddedOn AddedBy</th>
+         <th>BouquetName Code</th>
+		
+		<th>Rate LcoSharing</th>
+		<th>Allocation Type</th>
+		<th>Box Type</th>
+		<th>Status</th>
+		<th>Type</th>
+		<th>Package</th>
+		<th>Alacarte</th>
+		<th>Action</th>
+	  </tr>
+    </thead>
+    <tbody>
+    <?php $i=1 ?>
+@foreach($prp_bouque as $row)
+      <tr>
+	    @php 	
+			$carbon = \Illuminate\Support\Carbon::parse ($row->CreatedOn);
+			$date = $carbon->format('M d Y h:iA');			
+			$package_assets=$row->assets->where('PackageId', '<>', null);
+			$alacarte_assets=$row->assets->where('ChannelId', '<>', null);
+		@endphp
+        <td> {{$date}}&ensp;{{$row->createdby->NAME}} </td>
+        <td> {{$row->BouqueName}} {{$row->BouqueCode }}</td>
+        <td> {{round($row->Rate,2) }} &ensp;{{$row->LCOSharing }}</td>
+       <td> {{$row->AType?'Primary':'Secondary'}}</td>      
+       <td> {{$row->BType?'HD':'SD'}}</td>      
+       <td> {{$row->Status?'ACTIVE':'INACTIVE'}}</td> 
+       <td> {{$row->packagetype->name}}</td> 
+		@if($package_assets->count())
+		<td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#packages{{$i}}">{{$package_assets->count()}}</button></td>
+		@else <td></td>
+		@endif
+		@if($alacarte_assets->count())
+		<td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alacarte{{$i}}">{{$alacarte_assets->count()}}</button></td>
+		@else
+		<td></td>
+		@endif
+		<td><div class="dropdown">            
+            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+              <i class="bx bx-dots-vertical-rounded"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{Request::root()}}/prp_bouque/change-status-prp_bouque/{{$row->id }}"
+                ><i class="bx bx-windows me-1"></i> @if($row->status==0) {{"Activate"}}  @else {{"Dectivate"}} @endif</a
+              >
+              <a class="dropdown-item" href="{{Request::root()}}/prp_bouque/edit-prp_bouque/{{$row->id}}"
+                ><i class="bx bx-edit-alt me-1"></i> Edit</a
+              >
+              <a class="dropdown-item" href="{{Request::root()}}/prp_bouque/delete-prp_bouque/{{$row->id}}" onclick="return confirm('are you sure to delete')"
+                ><i class="bx bx-trash me-1"></i> Delete</a
+              >
+            </div>
+          </div></td>
+		<div class="modal fade" id="packages{{$i}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-sm" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel2">Packages</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+							@foreach($package_assets as $asset)
+							<p class="card-text">{{ $asset->package->PackageName}}{{ !$loop->last ? ', ' : '' }}</p>
+							@endforeach
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+		<div class="modal fade" id="alacarte{{$i}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-sm" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel2">Alacarte</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+									  @foreach($alacarte_assets as $asset)
+											{{ $asset->channel->ChannelName}}{{ !$loop->last ? ', ' : '' }}
+										@endforeach
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+      </tr>
+	  
+    <?php $i++;  ?>
+    @endforeach
+    </tbody>
+  </table>
+   @else
+  <div class="alert alert-info" role="alert">
+                    <strong>No Reports Found!</strong>
+                </div>
+ @endif
 @if(count($prp_bouque) > 0)	
         <nav aria-label="Page navigation">{{ $prp_bouque->links() }}	</nav>
         <?php $i = 1; ?>
@@ -420,6 +541,7 @@ Search
 
 <!-- ... (pagination) ... -->
 
-</div></div>
+</div>
+</div>
 
 @include('includes.footer')

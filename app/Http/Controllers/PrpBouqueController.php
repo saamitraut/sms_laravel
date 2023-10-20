@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PrpBouque as PrpBouque;
 use App\Models\PackageType as PackageType;
+use App\Models\SmsBroadcaster as SmsBroadcaster;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
@@ -11,20 +12,18 @@ class PrpBouqueController extends Controller {
 
     public function index(Request $request)
     {
-        $data['prp_bouque'] = PrpBouque::all();
+        // $data['prp_bouque'] = PrpBouque::all();
         $data['prp_bouque'] = PrpBouque::paginate($request->get('pagination_limit', 5));
         $data['columnNames'] = ['Id','BouqueCode','BouqueName','Rate','LCOSharing','BType','Status','AType','Description','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','isRio','RIOAlaCarte1Count','RIOAlaCarte2Count','PackageTypeId','MRP','broadcaster_id'];
         
 		$package_types = PackageType::all();		
-		
-		// foreach($package_types as $package_type){
-			// echo $package_type->id,'\n';
-			// echo $package_type->name,'\n';
-		// }
-		// exit;
 		$data['package_types'] = $package_types;		
-		
-		// dd($data);
+		$data['broadcasters']=SmsBroadcaster::all();
+		// searching purpose
+        if (request()->has('package_type')) {          
+			$data['prp_bouque']=PrpBouque::where('PackageTypeId', '=', request()->input('package_type'))->paginate($request->get('pagination_limit', 5));
+			// dd($data);
+        }
 		
 		return view('prp_bouque/index', $data); 
 	

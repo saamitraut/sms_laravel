@@ -30,18 +30,6 @@ Route::group(array('prefix' => 'states'), function() {
     Route::get('/view-states/{id}', 'StateController@view');
 });
 // end of states routes
-// routes for prp_bouques.
-Route::group(array('prefix' => 'prp_bouques'), function() {
-    Route::get('/', 'PrpBouqueController@index');
-    Route::get('/add-prp_bouques', 'PrpBouqueController@add');
-    Route::post('/add-prp_bouques-post', 'PrpBouqueController@addPost');
-    Route::get('/delete-prp_bouques/{id}', 'PrpBouqueController@delete');
-    Route::get('/edit-prp_bouques/{id}', 'PrpBouqueController@edit');
-    Route::post('/edit-prp_bouques-post', 'PrpBouqueController@editPost');
-    Route::get('/change-status-prp_bouques/{id}', 'PrpBouqueController@changeStatus');
-    Route::get('/view-prp_bouques/{id}', 'PrpBouqueController@view');
-});
-// end of prp_bouques routes
 // routes for sms_subscribers.
 Route::group(array('prefix' => 'sms_subscribers'), function() {
     Route::get('/', 'SmsSubscriberController@index');
@@ -369,7 +357,8 @@ Route::group(array('prefix' => 'prp_demobouque'), function() {
 // routes for prp_bouque.
 Route::group(array('prefix' => 'prp_bouque'), function() {
     Route::get('/', 'PrpBouqueController@index');
-    Route::get('/add-prp_bouque', 'PrpBouqueController@add');
+    Route::post('/', 'PrpBouqueController@index');
+	Route::get('/add-prp_bouque', 'PrpBouqueController@add');
     Route::post('/add-prp_bouque-post', 'PrpBouqueController@addPost');
     Route::get('/delete-prp_bouque/{id}', 'PrpBouqueController@delete');
     Route::get('/edit-prp_bouque/{id}', 'PrpBouqueController@edit');
@@ -390,3 +379,15 @@ Route::group(array('prefix' => 'package_types'), function() {
     Route::get('/view-package_types/{id}', 'PackageTypeController@view');
 });
 // end of package_types routes
+// routes for sms_broadcaster.
+Route::group(array('prefix' => 'sms_broadcaster'), function() {
+    Route::get('/', 'SmsBroadcasterController@index');
+    Route::get('/add-sms_broadcaster', 'SmsBroadcasterController@add');
+    Route::post('/add-sms_broadcaster-post', 'SmsBroadcasterController@addPost');
+    Route::get('/delete-sms_broadcaster/{id}', 'SmsBroadcasterController@delete');
+    Route::get('/edit-sms_broadcaster/{id}', 'SmsBroadcasterController@edit');
+    Route::post('/edit-sms_broadcaster-post', 'SmsBroadcasterController@editPost');
+    Route::get('/change-status-sms_broadcaster/{id}', 'SmsBroadcasterController@changeStatus');
+    Route::get('/view-sms_broadcaster/{id}', 'SmsBroadcasterController@view');
+});
+// end of sms_broadcaster routes
