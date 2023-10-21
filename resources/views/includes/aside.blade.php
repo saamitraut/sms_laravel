@@ -139,7 +139,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="\prp_bouques" class="menu-link">
+                  <a href="\prp_bouque" class="menu-link">
                     <div data-i18n="Prepaid Bouques">Prepaid Bouques</div>
                   </a>
                 </li>

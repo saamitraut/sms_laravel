@@ -9,7 +9,10 @@ use Eloquent;
 class PrpBouqueAsset extends Eloquent
 {
     // protected $table = 'prp_bouque_assets';
-
+	protected $primaryKey = 'Id';
+	const UPDATED_AT = 'UpdatedOn';
+	const CREATED_AT = 'CreatedOn';  
+	
     public static function list()
     {
         $prp_bouque_assets = self::all()->toArray();
