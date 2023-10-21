@@ -139,6 +139,11 @@
                   </a>
                 </li>
                 <li class="menu-item">
+                  <a href="\sms_broadcaster" class="menu-link">
+                    <div data-i18n="Broadcasters">Broadcasters</div>
+                  </a>
+                </li>
+				<li class="menu-item">
                   <a href="\prp_bouque" class="menu-link">
                     <div data-i18n="Prepaid Bouques">Prepaid Bouques</div>
                   </a>

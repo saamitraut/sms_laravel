@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SmsPackage as SmsPackage;
+use App\Models\SmsBroadcaster as SmsBroadcaster;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
@@ -11,9 +12,13 @@ class SmsPackageController extends Controller {
 
     public function index(Request $request)
     {
-        $data['sms_package'] = SmsPackage::all();
         $data['sms_package'] = SmsPackage::paginate($request->get('pagination_limit', 5));
-        $data['columnNames'] = ['Id','PackageName','CasCode','Price','Price2','BillingCycle','StartDate','EndDate','Status','Description','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','PackageType','CasCodeGospel','IsPrepaid','CasCodeTelelynx','BranchId','DASType','CasCodeNSTV','CasCodeKingvon','CasCodeCatVision','CasCodeBCas'];
+        $data['broadcasters'] = SmsBroadcaster::all();
+		
+        // $package=SmsPackage::find(1);
+		// dd($package->broadcaster);
+		
+		$data['columnNames'] = ['Id','PackageName','CasCode','Price','Price2','BillingCycle','StartDate','EndDate','Status','Description','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','PackageType','CasCodeGospel','IsPrepaid','CasCodeTelelynx','BranchId','DASType','CasCodeNSTV','CasCodeKingvon','CasCodeCatVision','CasCodeBCas'];
         return view('sms_package/index', $data);
     }
 
@@ -51,9 +56,11 @@ class SmsPackageController extends Controller {
              'CasCodeKingvon' => Input::get('CasCodeKingvon'),
              'CasCodeCatVision' => Input::get('CasCodeCatVision'),
              'CasCodeBCas' => Input::get('CasCodeBCas'),
+			 'broadcaster_id' => Input::get('broadcaster_id'),
         );
         $SmsPackage_id = SmsPackage::insert($SmsPackage_data);
-        return redirect('sms_package')->with('message', 'SmsPackage successfully added');
+        
+		return redirect('sms_package')->with('message', 'SmsPackage successfully added');
     }
 
     public function delete($id)
@@ -74,7 +81,6 @@ class SmsPackageController extends Controller {
         $id = Input::get('sms_package_id');
 
         $data = array(
-          'Id' => Input::get('Id'),
           'PackageName' => Input::get('PackageName'),
           'CasCode' => Input::get('CasCode'),
           'Price' => Input::get('Price'),
@@ -100,8 +106,10 @@ class SmsPackageController extends Controller {
           'CasCodeKingvon' => Input::get('CasCodeKingvon'),
           'CasCodeCatVision' => Input::get('CasCodeCatVision'),
           'CasCodeBCas' => Input::get('CasCodeBCas'),
+          'broadcaster_id' => Input::get('broadcaster_id'),
         );
-        SmsPackage::where('id', '=', $id)->update($data);
+        // dd($data);
+		SmsPackage::where('Id', '=', $id)->update($data);
         return redirect('sms_package')->with('message', 'SmsPackage Updated successfully');
     }
 

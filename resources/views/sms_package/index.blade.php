@@ -52,136 +52,145 @@
                  <form role="form" method="post" action="/sms_package/add-sms_package-post" >
                           <input type="hidden" name="_token" value="{{ csrf_token() }}" >
            
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Id">Id:</label>
         <input type="text" class="form-control" id="Id" name="Id">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="PackageName">PackageName:</label>
         <input type="text" class="form-control" id="PackageName" name="PackageName">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCode">CasCode:</label>
         <input type="text" class="form-control" id="CasCode" name="CasCode">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Price">Price:</label>
         <input type="text" class="form-control" id="Price" name="Price">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Price2">Price2:</label>
         <input type="text" class="form-control" id="Price2" name="Price2">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="BillingCycle">BillingCycle:</label>
         <input type="text" class="form-control" id="BillingCycle" name="BillingCycle">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="StartDate">StartDate:</label>
         <input type="text" class="form-control" id="StartDate" name="StartDate">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="EndDate">EndDate:</label>
         <input type="text" class="form-control" id="EndDate" name="EndDate">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Status">Status:</label>
         <input type="text" class="form-control" id="Status" name="Status">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Description">Description:</label>
         <input type="text" class="form-control" id="Description" name="Description">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CreatedOn">CreatedOn:</label>
         <input type="text" class="form-control" id="CreatedOn" name="CreatedOn">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CreatedBy">CreatedBy:</label>
         <input type="text" class="form-control" id="CreatedBy" name="CreatedBy">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="UpdatedOn">UpdatedOn:</label>
         <input type="text" class="form-control" id="UpdatedOn" name="UpdatedOn">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="UpdatedBy">UpdatedBy:</label>
         <input type="text" class="form-control" id="UpdatedBy" name="UpdatedBy">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Deleted">Deleted:</label>
         <input type="text" class="form-control" id="Deleted" name="Deleted">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Remark">Remark:</label>
         <input type="text" class="form-control" id="Remark" name="Remark">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="PackageType">PackageType:</label>
         <input type="text" class="form-control" id="PackageType" name="PackageType">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeGospel">CasCodeGospel:</label>
         <input type="text" class="form-control" id="CasCodeGospel" name="CasCodeGospel">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="IsPrepaid">IsPrepaid:</label>
         <input type="text" class="form-control" id="IsPrepaid" name="IsPrepaid">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeTelelynx">CasCodeTelelynx:</label>
         <input type="text" class="form-control" id="CasCodeTelelynx" name="CasCodeTelelynx">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="BranchId">BranchId:</label>
         <input type="text" class="form-control" id="BranchId" name="BranchId">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="DASType">DASType:</label>
         <input type="text" class="form-control" id="DASType" name="DASType">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeNSTV">CasCodeNSTV:</label>
         <input type="text" class="form-control" id="CasCodeNSTV" name="CasCodeNSTV">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeKingvon">CasCodeKingvon:</label>
         <input type="text" class="form-control" id="CasCodeKingvon" name="CasCodeKingvon">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeCatVision">CasCodeCatVision:</label>
         <input type="text" class="form-control" id="CasCodeCatVision" name="CasCodeCatVision">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeBCas">CasCodeBCas:</label>
         <input type="text" class="form-control" id="CasCodeBCas" name="CasCodeBCas">
     </div>
+	<div class="mb-3">
+                        <label for="broadcaster_id" class="form-label">Broadcaster</label>
+                        <select id="broadcaster_id" class="form-select">
+                          <option value="0">Select Broadcaster</option>
+                          @foreach($broadcasters as $broadcaster)
+						  <option value="{{$broadcaster->ID}}">{{$broadcaster->BROADCASTERNAME}}</option>
+                          @endforeach
+                        </select>
+                      </div>
                 </div >
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -201,6 +210,7 @@
             <div class='card-body'>
             <h5 class='card-title'>Id : {{$sms_package->Id}}</h5>
             <h5 class='card-title'>PackageName : {{$sms_package->PackageName}}</h5>
+            <h5 class='card-title'>Broadcaster : {{$sms_package->broadcaster?$sms_package->broadcaster->BROADCASTERNAME:''}}</h5>
             <h5 class='card-title'>CasCode : {{$sms_package->CasCode}}</h5>
             <h5 class='card-title'>Price : {{$sms_package->Price}}</h5>
             <h5 class='card-title'>Price2 : {{$sms_package->Price2}}</h5>
@@ -266,139 +276,144 @@
             <div class='modal-body'>
             <form role='form' method='post' action='{{Request::root()}}/sms_package/edit-sms_package-post' enctype='multipart/form-data'>
                     <input type='hidden' name='_token' value='{{ csrf_token() }}'>
-                    <input type='hidden' value='<?php echo $sms_package->id ?>'   name='sms_package_id'>
-
-    <div class="form-group">
-        
-        <label for="Id">Id:</label>
-        <input type="text" value="{{ $sms_package->Id}}" class="form-control" id="Id" name="Id">
-    </div>
-    <div class="form-group">
+                    <input type='hidden' value='<?php echo $sms_package->Id ?>'   name='sms_package_id'>
+	<div class="row"><div class="form-group col-md-4">
         
         <label for="PackageName">PackageName:</label>
         <input type="text" value="{{ $sms_package->PackageName}}" class="form-control" id="PackageName" name="PackageName">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCode">CasCode:</label>
         <input type="text" value="{{ $sms_package->CasCode}}" class="form-control" id="CasCode" name="CasCode">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Price">Price:</label>
         <input type="text" value="{{ $sms_package->Price}}" class="form-control" id="Price" name="Price">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Price2">Price2:</label>
         <input type="text" value="{{ $sms_package->Price2}}" class="form-control" id="Price2" name="Price2">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="BillingCycle">BillingCycle:</label>
         <input type="text" value="{{ $sms_package->BillingCycle}}" class="form-control" id="BillingCycle" name="BillingCycle">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="StartDate">StartDate:</label>
         <input type="text" value="{{ $sms_package->StartDate}}" class="form-control" id="StartDate" name="StartDate">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="EndDate">EndDate:</label>
         <input type="text" value="{{ $sms_package->EndDate}}" class="form-control" id="EndDate" name="EndDate">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Status">Status:</label>
         <input type="text" value="{{ $sms_package->Status}}" class="form-control" id="Status" name="Status">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Description">Description:</label>
         <input type="text" value="{{ $sms_package->Description}}" class="form-control" id="Description" name="Description">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CreatedOn">CreatedOn:</label>
         <input type="text" value="{{ $sms_package->CreatedOn}}" class="form-control" id="CreatedOn" name="CreatedOn">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CreatedBy">CreatedBy:</label>
         <input type="text" value="{{ $sms_package->CreatedBy}}" class="form-control" id="CreatedBy" name="CreatedBy">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="UpdatedOn">UpdatedOn:</label>
         <input type="text" value="{{ $sms_package->UpdatedOn}}" class="form-control" id="UpdatedOn" name="UpdatedOn">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="UpdatedBy">UpdatedBy:</label>
         <input type="text" value="{{ $sms_package->UpdatedBy}}" class="form-control" id="UpdatedBy" name="UpdatedBy">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Deleted">Deleted:</label>
         <input type="text" value="{{ $sms_package->Deleted}}" class="form-control" id="Deleted" name="Deleted">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="Remark">Remark:</label>
         <input type="text" value="{{ $sms_package->Remark}}" class="form-control" id="Remark" name="Remark">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="PackageType">PackageType:</label>
         <input type="text" value="{{ $sms_package->PackageType}}" class="form-control" id="PackageType" name="PackageType">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeGospel">CasCodeGospel:</label>
         <input type="text" value="{{ $sms_package->CasCodeGospel}}" class="form-control" id="CasCodeGospel" name="CasCodeGospel">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="IsPrepaid">IsPrepaid:</label>
         <input type="text" value="{{ $sms_package->IsPrepaid}}" class="form-control" id="IsPrepaid" name="IsPrepaid">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeTelelynx">CasCodeTelelynx:</label>
         <input type="text" value="{{ $sms_package->CasCodeTelelynx}}" class="form-control" id="CasCodeTelelynx" name="CasCodeTelelynx">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="BranchId">BranchId:</label>
         <input type="text" value="{{ $sms_package->BranchId}}" class="form-control" id="BranchId" name="BranchId">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="DASType">DASType:</label>
         <input type="text" value="{{ $sms_package->DASType}}" class="form-control" id="DASType" name="DASType">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeNSTV">CasCodeNSTV:</label>
         <input type="text" value="{{ $sms_package->CasCodeNSTV}}" class="form-control" id="CasCodeNSTV" name="CasCodeNSTV">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeKingvon">CasCodeKingvon:</label>
         <input type="text" value="{{ $sms_package->CasCodeKingvon}}" class="form-control" id="CasCodeKingvon" name="CasCodeKingvon">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeCatVision">CasCodeCatVision:</label>
         <input type="text" value="{{ $sms_package->CasCodeCatVision}}" class="form-control" id="CasCodeCatVision" name="CasCodeCatVision">
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
         
         <label for="CasCodeBCas">CasCodeBCas:</label>
         <input type="text" value="{{ $sms_package->CasCodeBCas}}" class="form-control" id="CasCodeBCas" name="CasCodeBCas">
     </div>
-
+	<div class="form-group col-md-4"><div class="mb-3">
+                        <label for="broadcaster_id" class="form-label">Broadcaster</label>
+                        <select id="broadcaster_id" name="broadcaster_id"  class="form-select">
+                          <option value="0">Select Broadcaster</option>
+                          @foreach($broadcasters as $broadcaster)
+						  <option value="{{$broadcaster->ID}}"
+							  {{$sms_package->broadcaster_id==$broadcaster->ID ?'selected':''}}
+						  >{{$broadcaster->BROADCASTERNAME}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+    </div></div>
       </div>
       <div class='modal-footer'>
         <button type='button' class='btn btn-outline-secondary' data-bs-dismiss='modal'>

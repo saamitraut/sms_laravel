@@ -9,15 +9,10 @@ use Eloquent;
 class SmsPackage extends Eloquent
 {
     protected $table = 'sms_package';
+	const UPDATED_AT = 'UpdatedOn';
 
-    public static function list()
+    public function broadcaster()
     {
-        $sms_package = self::all()->toArray();
-        $res = array();
-        foreach ($sms_package as $sms_package)
-        {
-            $res[$sms_package['Id']] = $sms_package;
-        }
-        return $res;
+         return $this->belongsTo(SmsBroadcaster::class, 'broadcaster_id', 'ID');
     }
 }

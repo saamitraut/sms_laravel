@@ -20,6 +20,13 @@ class PrpBouqueController extends Controller {
         $data['prp_bouque'] = PrpBouque::orderBy('Id', 'desc')->paginate($request->get('pagination_limit', 5));
         $data['columnNames'] = ['Id','BouqueCode','BouqueName','Rate','LCOSharing','BType','Status','AType','Description','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','isRio','RIOAlaCarte1Count','RIOAlaCarte2Count','PackageTypeId','MRP','broadcaster_id'];
         
+		$data['broadcasters_with_packages'] = SmsBroadcaster::has('packages')->orderBy('BROADCASTERNAME')->get();
+		// $broadcasters_with_packages = SmsBroadcaster::has('packages')->orderBy('BROADCASTERNAME')->get();
+		// dd($broadcasters_with_packages->first()->packages);
+		
+		$data['broadcasters_with_channels'] = SmsBroadcaster::has('channels')->orderBy('BROADCASTERNAME')->get();
+		
+		
 		$data['package_types'] = PackageType::all();		
 		$data['broadcasters']=SmsBroadcaster::all();		
 		$data['packages']=SmsPackage::all();
