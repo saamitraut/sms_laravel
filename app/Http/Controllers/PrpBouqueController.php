@@ -59,7 +59,7 @@ class PrpBouqueController extends Controller {
              'AType' => Input::get('AType'),
              'Description' => Input::get('Description'),
              'PackageTypeId' => Input::get('PackageTypeId'),
-             'broadcaster_id' => Input::get('broadcaster_id'),
+             // 'broadcaster_id' => Input::get('broadcaster_id'),
 			 'CreatedBy' => $request->user()->id
         );
         
