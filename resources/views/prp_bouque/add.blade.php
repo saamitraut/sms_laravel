@@ -155,21 +155,21 @@
                           <small class="text-light fw-semibold">Channels</small>
                      <div id="accordionChannels" class="accordion mt-3 accordion-without-arrow"><div class="row">  
 					@foreach($broadcasters_with_channels as $broadcaster)
-					<div class="accordion-item card col-md-3">
+					<div style="max-height: 300px;  overflow-y: auto; scrollbar-width: none;" class="accordion-item card">
                       <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
                         <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#broadcasterChannels-{{$broadcaster->ID}}" aria-controls="accordionIcon-1" aria-expanded="false">
 						{{$broadcaster->BROADCASTERNAME}}
                         </button>
                       </h2>
                       <div id="broadcasterChannels-{{$broadcaster->ID}}" class="accordion-collapse collapse" data-bs-parent="#accordionChannels" style="">
-						<div class="accordion-body">
+						<div class="accordion-body"><div class="row">
                           @foreach($broadcaster->channels as $channel)
-						  <div class="form-check mt-3">
+						  <div class="form-check mt-3 col-md-2">
                             <input onclick="checkedChannelsCount()" class="form-check-input" name="channels[]" type="checkbox" value="{{$channel->Id}}" id="defaultCheck1" data-channel="{{$channel->ChannelName}}">
                             <label class="form-check-label" for="defaultCheck1"> {{$channel->ChannelName}} </label>
                           </div>
 						  @endforeach
-                        </div>
+                        </div> </div>
                       </div>
                     </div>
 					@endforeach	
