@@ -155,17 +155,27 @@
                           <small class="text-light fw-semibold">Channels</small>
                      <div id="accordionChannels" class="accordion mt-3 accordion-without-arrow"><div class="row">  
 					@foreach($broadcasters_with_channels as $broadcaster)
-					<div style="max-height: 300px;  overflow-y: auto; scrollbar-width: none;" class="accordion-item card">
+					<div style="max-height: 300px;  overflow-y: auto; scrollbar-width: none;" class="accordion-item broadcasterC card">
                       <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
                         <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#broadcasterChannels-{{$broadcaster->ID}}" aria-controls="accordionIcon-1" aria-expanded="false">
 						{{$broadcaster->BROADCASTERNAME}}
                         </button>
                       </h2>
+					  
                       <div id="broadcasterChannels-{{$broadcaster->ID}}" class="accordion-collapse collapse" data-bs-parent="#accordionChannels" style="">
-						<div class="accordion-body"><div class="row">
+						<div class="accordion-body">
+						<div class="row"><div class="form-check mt-3 col-md-3">
+							<input type="checkbox" class="form-check-input" onclick="checkall({{$broadcaster->ID}})" id="checkAll{{$broadcaster->ID}}" />
+							<label class="form-check-label" for="checkAll">Check All</label>
+						</div>
+						<div class="form-check mt-3 col-md-3">
+							<input type="checkbox" onclick="uncheckall({{$broadcaster->ID}})" class="form-check-input" id="uncheckAll{{$broadcaster->ID}}" />
+							<label class="form-check-label" for="uncheckAll">Uncheck All</label>
+						</div></div>
+						<div class="row">
                           @foreach($broadcaster->channels as $channel)
 						  <div class="form-check mt-3 col-md-2">
-                            <input onclick="checkedChannelsCount()" class="form-check-input" name="channels[]" type="checkbox" value="{{$channel->Id}}" id="defaultCheck1" data-channel="{{$channel->ChannelName}}">
+                            <input onclick="checkedChannelsCount()" class="form-check-input {{$broadcaster->ID}}-checkbox" name="channels[]" type="checkbox" value="{{$channel->Id}}" id="defaultCheck1" data-channel="{{$channel->ChannelName}}">
                             <label class="form-check-label" for="defaultCheck1"> {{$channel->ChannelName}} </label>
                           </div>
 						  @endforeach
@@ -204,7 +214,7 @@
 				<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
 				  Chosen channels <p class="card-text" ></p>
 				</button>
-				<div class="dropdown-menu" id="chosenchannels">
+				<div class="dropdown-menu" data-popper-placement="top-end" id="chosenchannels">
 				</div>
 			  </div>
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -272,7 +282,7 @@
 	// Iterate over the checked package names and append them to the element
 	for (const channel of checkedChannels) {
 	  
-	  const paragraphElement = document.createElement('p');
+	  const paragraphElement = document.createElement('div');
 	  paragraphElement.classList.add('dropdown-item');
 	  paragraphElement.textContent = channel;
 
@@ -281,4 +291,39 @@
 	}
 
  }
+ 
+ // Select all checkboxes
+ 
+function checkall(broadcasterid) {
+  
+  var checkboxes = document.getElementsByClassName(''+broadcasterid+'-checkbox');
+  for (var i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].checked = true;
+  }
+	checkedChannelsCount();
+  document.getElementById('uncheckAll'+broadcasterid).checked = false;
+}
+
+// Unselect all checkboxes
+function uncheckall(broadcasterid) {
+  
+  var checkboxes = document.getElementsByClassName(''+broadcasterid+'-checkbox');
+  
+  for (var i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].checked = false;
+  }
+  checkedChannelsCount();
+  document.getElementById('checkAll'+broadcasterid).checked = false;
+}
+</script>
+<script>
+const bouqueDivs = document.querySelectorAll('.broadcasterC');
+
+for (const bouqueDiv of bouqueDivs) {
+  bouqueDiv.addEventListener('click', () => {
+   setTimeout(() => {
+      bouqueDiv.scrollIntoView();
+    }, 500);
+  });
+}  
 </script>
