@@ -12,9 +12,12 @@ class SmsSubscriberaccountController extends Controller {
 
     public function index(Request $request)
     {
-        $data['sms_subscriberaccounts'] = SmsSubscriberaccount::all();
+        // $account=SmsSubscriberaccount::find(41);
+		// dd($account->subscriber->operator);
+		
+		// $data['sms_subscriberaccounts'] = SmsSubscriberaccount::all();
         $data['sms_subscriberaccounts'] = SmsSubscriberaccount::paginate($request->get('pagination_limit', 5));
-    $data['SMS_SUBSCRIBERS'] = SMSSUBSCRIBERS::list();
+    // $data['SMS_SUBSCRIBERS'] = SMSSUBSCRIBERS::list();
         $data['columnNames'] = ['Id','SubscriberId','ConnectionId','IsPrimary','ApplicableRate','TimeShift','PairingId','BillingSMonth','ActivationDate','DeactivationDate','ExpiryDate','Description','ActionTaken','Status','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','sms_id','isblacklisted','blacklistfilename','PrePaidFlag','Acct_Type'];
         return view('sms_subscriberaccounts/index', $data);
     }

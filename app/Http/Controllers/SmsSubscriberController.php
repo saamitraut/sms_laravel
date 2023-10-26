@@ -13,29 +13,14 @@ class SmsSubscriberController extends Controller {
     public function index(Request $request)
     {
         
-		$sms_subscribers = SmsSubscriber::paginate($request->get('pagination_limit', 5));
+		$data['sms_subscribers'] = SmsSubscriber::paginate($request->get('pagination_limit', 5));
 		
-					// dd($sms_subscribers->first()->OperatorId);
-		
-		// foreach($sms_subscribers as $sms_subscriber) {
-			// foreach($sms_subscriber->accounts as $account) {
-				//dd($account->transactions);
-				// $transactions = $account->transactions;					
-						//Group the transactions by AddedBy and CreatedOn.
-				// $groupedTransactions = $transactions->groupBy(['CreatedBy','CreatedOn','ActivationDate','DeactivationDate']);
-				// dd($groupedTransactions);
-			// }			
-		// }
-		
-		$carbon = Carbon::now();
-		$data['date'] = $carbon->format('M d Y h:iA');	
-		
-        $data['sms_subscribers'] = $sms_subscribers;
 		$data['SMS_OPERATOR'] = SMSOPERATOR::list();
 		$data['SMS_SOCIETY_MASTER'] = SMSSOCIETYMASTER::list();
-		// $data['SMS_SUBSCRIBERS'] = SmsSubscriber::list();
+		
         $data['columnNames'] = ['Id','FormNo','CustomerId','OperatorId','SocietyId','MobileNo','Status','ProspectId','PCustomerId','OpTobeBilled','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','sms_id'];
-        return view('sms_subscribers/index', $data);
+        
+		return view('sms_subscribers/index', $data);
     }
 
     public function add()

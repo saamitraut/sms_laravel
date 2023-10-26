@@ -199,14 +199,14 @@
                       <li class="list-group-item"><b>ActivationDate DeactivationDate</b> {{$account->ActivationDate}} {{$account->DeactivationDate}}</li>
                       <li class="list-group-item"><b>Remark:</b> {{$account->Remark}}</li>
                       <li class="list-group-item"><b>Bouques</b>&ensp;{{$account->transactions->count()}}</li>
-                      <li class="list-group-item"><b>Action</b><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalScrollable">
+                      <li class="list-group-item"><b>Action</b><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBouquets">
                           Add Bouque
                         </button></li>
                       <!--<li class="list-group-item">Vestibulum at eros</li>-->
                     </ul>
 					<br>
 					
-					<div class="modal fade" id="modalScrollable" tabindex="-1" style="display: none;" aria-hidden="true">
+					<div class="modal fade" id="addBouquets" tabindex="-1" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                           <div class="modal-content">
                             <div class="modal-header">

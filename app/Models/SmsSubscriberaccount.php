@@ -24,4 +24,9 @@ class SmsSubscriberaccount extends Eloquent
     {
         return $this->hasMany(PrpAccounttransaction::class, 'AccountId', 'Id');
     }
+	public function subscriber()
+    {
+         return $this->belongsTo(SmsSubscriber::class, 'SubscriberId', 'Id');
+    }
+
 }

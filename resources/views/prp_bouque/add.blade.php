@@ -152,10 +152,18 @@
                         <div class="accordion-body">
                           <div class="col-md-12">
 						  
-                          <small class="text-light fw-semibold">Channels</small>
+                          <div class="row"><div class="col-md-3"><small class="text-light fw-semibold">Channels</small></div>
+							<div class="col-md-3"><select id="ChooseBroadcaster" class="form-select  form-select-sm">
+							  <option value="0">Choose Broadcaster</option>
+							   @foreach($broadcasters_with_channels as $broadcaster)
+								<option value="broadcasterC-{{$broadcaster->ID}}">{{$broadcaster->BROADCASTERNAME}}</option>
+								@endforeach
+							</select></div>
+							</div>
+							
                      <div id="accordionChannels" class="accordion mt-3 accordion-without-arrow"><div class="row">  
 					@foreach($broadcasters_with_channels as $broadcaster)
-					<div style="max-height: 300px;  overflow-y: auto; scrollbar-width: none;" class="accordion-item broadcasterC card">
+					<div style="max-height: 300px;  overflow-y: auto; scrollbar-width: none;" class="accordion-item broadcasterC card" id="broadcasterC-{{$broadcaster->ID}}">
                       <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
                         <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#broadcasterChannels-{{$broadcaster->ID}}" aria-controls="accordionIcon-1" aria-expanded="false">
 						{{$broadcaster->BROADCASTERNAME}}
@@ -164,14 +172,12 @@
 					  
                       <div id="broadcasterChannels-{{$broadcaster->ID}}" class="accordion-collapse collapse" data-bs-parent="#accordionChannels" style="">
 						<div class="accordion-body">
-						<div class="row"><div class="form-check mt-3 col-md-3">
-							<input type="checkbox" class="form-check-input" onclick="checkall({{$broadcaster->ID}})" id="checkAll{{$broadcaster->ID}}" />
+						<div class="form-check mt-3">
+							<input type="checkbox" class="form-check-input" onclick="checkall({{$broadcaster->ID}},this)" id="checkAll{{$broadcaster->ID}}" />
 							<label class="form-check-label" for="checkAll">Check All</label>
 						</div>
-						<div class="form-check mt-3 col-md-3">
-							<input type="checkbox" onclick="uncheckall({{$broadcaster->ID}})" class="form-check-input" id="uncheckAll{{$broadcaster->ID}}" />
-							<label class="form-check-label" for="uncheckAll">Uncheck All</label>
-						</div></div>
+						
+						
 						<div class="row">
                           @foreach($broadcaster->channels as $channel)
 						  <div class="form-check mt-3 col-md-2">
@@ -293,29 +299,21 @@
  }
  
  // Select all checkboxes
- 
-function checkall(broadcasterid) {
-  
+function checkall(broadcasterid,checkbox) {
   var checkboxes = document.getElementsByClassName(''+broadcasterid+'-checkbox');
+  
   for (var i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].checked = true;
+    if(checkbox.checked){
+		checkboxes[i].checked = true;
+	}else{
+		checkboxes[i].checked = false;
+	}
   }
 	checkedChannelsCount();
-  document.getElementById('uncheckAll'+broadcasterid).checked = false;
-}
-
-// Unselect all checkboxes
-function uncheckall(broadcasterid) {
   
-  var checkboxes = document.getElementsByClassName(''+broadcasterid+'-checkbox');
-  
-  for (var i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].checked = false;
-  }
-  checkedChannelsCount();
-  document.getElementById('checkAll'+broadcasterid).checked = false;
 }
 </script>
+
 <script>
 const bouqueDivs = document.querySelectorAll('.broadcasterC');
 
@@ -326,4 +324,13 @@ for (const bouqueDiv of bouqueDivs) {
     }, 500);
   });
 }  
+function move(id) {
+  // Get the DIV element with the specified ID.
+  const div = document.getElementById(id);
+  // Get the parent element of the DIV.
+  div.parentElement.prepend(div) 
+}
+document.getElementById('ChooseBroadcaster').addEventListener('change', function() {
+  move(this.value);
+});
 </script>
