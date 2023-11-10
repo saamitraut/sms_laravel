@@ -236,7 +236,6 @@
 
 
 
-
 <script>
  function checkedPackagesCount(){
 	const checkedPackages = [];
