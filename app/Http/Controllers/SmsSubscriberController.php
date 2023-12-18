@@ -23,6 +23,20 @@ class SmsSubscriberController extends Controller {
 		return view('sms_subscribers/index', $data);
     }
 
+
+    public function index2(Request $request)
+    {
+        
+		$data['sms_subscribers'] = SmsSubscriber::all();
+		
+		$data['SMS_OPERATOR'] = SMSOPERATOR::list();
+		$data['SMS_SOCIETY_MASTER'] = SMSSOCIETYMASTER::list();
+		
+        $data['columnNames'] = ['Id','FormNo','CustomerId','OperatorId','SocietyId','MobileNo','Status','ProspectId','PCustomerId','OpTobeBilled','CreatedOn','CreatedBy','UpdatedOn','UpdatedBy','Deleted','Remark','sms_id'];
+        
+		return $data;
+    }
+
     public function add()
     {
         return view('sms_subscribers/add');

@@ -80,7 +80,7 @@ Search
        <td> {{$row->AType?'Primary':'Secondary'}}</td>      
        <td> {{$row->BType?'HD':'SD'}}</td>      
        <td> {{$row->Status?'ACTIVE':'INACTIVE'}}</td> 
-       <td> {{$row->packagetype->name}}</td> 
+       <td> {{$row->packagetype}}</td> 
 		
 		
 		@if($row->package_assets->count())

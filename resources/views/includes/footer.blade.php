@@ -16,6 +16,7 @@
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/index.js"></script>
 
     <!-- Page JS -->
     <script src="/assets/js/dashboards-analytics.js"></script>

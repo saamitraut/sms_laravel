@@ -40,6 +40,7 @@ Route::group(array('prefix' => 'sms_subscribers'), function() {
     Route::post('/edit-sms_subscribers-post', 'SmsSubscriberController@editPost');
     Route::get('/change-status-sms_subscribers/{id}', 'SmsSubscriberController@changeStatus');
     Route::get('/view-sms_subscribers/{id}', 'SmsSubscriberController@view');
+    Route::get('/api', 'SmsSubscriberController@index2');
 });
 // end of sms_subscribers routes
 // routes for sms_society_master.

@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('register', 'API\RegisterController@register');
+Route::group(array('prefix' => 'sms_subscribers'), function() {
+    Route::get('/', 'API\SmsSubscriberController@index');
+});
